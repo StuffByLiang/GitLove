@@ -1,0 +1,7 @@
+{
+  "name": "NewHacksWhoThis",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
