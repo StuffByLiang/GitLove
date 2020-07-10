@@ -1,0 +1,26 @@
+.photo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width : 500px;
+    height : 500px;
+}
+
+.cell-1 {
+    background-color: #C5DCFC;
+  }
+
+.grid-full{
+    padding: 16px;
+}
+
+ion-card {
+    border: 1px solid #222222;
+}
+
+@media (prefers-color-scheme: dark) {
+    ion-card {
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+    }
+}
