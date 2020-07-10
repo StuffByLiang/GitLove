@@ -2,38 +2,36 @@ import React from 'react';
 import { IonContent, IonHeader, IonToggle, IonList, IonListHeader, IonPage, IonChip, IonTitle, IonToolbar, IonCard, IonGrid, IonRow, IonCol, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import UserCard from '../components/UserCard';
-import './Notifications.css';
 
 
-
-const Notifications: React.FC = () => {
+const EditPreferencesPage: React.FC = () => {
     return (
         <>
             <IonPage>
                 <IonContent>
                     <IonList>
                         <IonListHeader>
-                            Notifications
+                            Preferences
                           </IonListHeader>
 
                         <IonItem>
                             <IonToggle slot="end" color="success" />
                             <IonLabel>
-                                Enable Notifications
+                                Maximum Distance
                             </IonLabel>
                         </IonItem>
 
                         <IonItem>
                             <IonToggle slot="end" color="success" />
                             <IonLabel>
-                                Icon Badge Notification
+                             Show Me
                             </IonLabel>
                         </IonItem>
 
                         <IonItem>
                             <IonToggle slot="end" color="success" />
                             <IonLabel>
-                                Enable Push Notifications
+                            Age Range
                             </IonLabel>
                         </IonItem>
 
@@ -45,4 +43,4 @@ const Notifications: React.FC = () => {
     );
 };
 
-export default Notifications;
+export default EditPreferencesPage;

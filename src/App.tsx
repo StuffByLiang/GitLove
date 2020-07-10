@@ -10,7 +10,7 @@ import {
   IonTabs
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import {toggle,chatbox, settings } from 'ionicons/icons';
+import { toggle, chatbox, settings } from 'ionicons/icons';
 
 /* All our pages */
 import Tab1 from './pages/Tab1';
@@ -19,6 +19,8 @@ import Tab3 from './pages/Tab3';
 import CodingPage from './pages/CodingPage';
 import Aiden from './pages/Aiden';
 import ChatPage from './pages/ChatPage';
+import Notifications from './pages/Notifications';
+import EditPreferencesPage from './pages/EditPreferencesPage';
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -51,6 +53,8 @@ const App: React.FC = () => (
           <Route path="/coding" component={CodingPage} />
           <Route path="/aiden" component={Aiden} />
           <Route path="/chat" component={ChatPage} />
+          <Route path="/Notifications" component={Notifications} />
+          <Route path="/EditPreferences" component={EditPreferencesPage} />
           <Route path="/" render={() => <Redirect to="/tab1" />} exact={true} />
         </IonRouterOutlet>
         <IonTabBar slot="bottom">

@@ -1,7 +1,5 @@
 .animContainer {
     display: flex;
+    justify-content: space-evenly;
 }
 
-.square {
-    text-align: center;
-}

@@ -5,6 +5,7 @@ import './Tab1.css';
 import { share, logoVimeo, logoFacebook, logoInstagram, logoTwitter } from 'ionicons/icons';
 import UserCard from '../components/UserCard';
 import { useSwipeable, Swipeable } from 'react-swipeable'
+import { Gesture, GestureConfig, createGesture } from '@ionic/core';
 
 const config = {
   onSwipedLeft: () => console.log("Swiped Left"),
@@ -46,19 +47,4 @@ const Tab1: React.FC = () => {
           </IonFabList>
         </IonFab>*/}
 
-<IonItemSliding >
-
-                <Swipeable onSwipedLeft={() => console.log("HI")} >
-          <UserCard />
-</Swipeable>
-
-</IonItemSliding>
-
-        
-
-      </IonContent>
-    </IonPage>
-  );
-};
-
-export default Tab1;
+        <UserCard />
