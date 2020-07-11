@@ -1,0 +1,7 @@
+(color "#f5f5dc")
+(define (pp x y s)
+        (circle x y s)
+        (circle (+ x (* s 2)) y s)
+        (rect x y (* s 2) (* s 7))
+        (circle (+ x s) (+ y (* s 8)) s))
+(pp 30 30 30)

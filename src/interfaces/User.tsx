@@ -1,9 +1,11 @@
+import firebase from "firebase"
+
 export interface User {
     _id: string;
     name: string;
     profilePicture: string;
     gender: Gender;
-    dateOfBirth: Date;
+    dateOfBirth: firebase.firestore.Timestamp;
     description: string;
     features: Array<{
         question: string,

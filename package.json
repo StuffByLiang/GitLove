@@ -1,6 +1,7 @@
 {
-  "name": "NewHacksWhoThis",
-  "version": "0.0.1",
+  "name": "GitLove",
+  "version": "1.0.0",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "@capacitor/core": "2.2.1",
