@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { IonContent, IonHeader, IonPage, IonChip, IonTitle, IonToolbar, IonCard, IonGrid, IonRow, IonCol, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton } from '@ionic/react';
 import { useSwipeable, Swipeable } from 'react-swipeable'
 import { Gesture, GestureConfig, createGesture } from '@ionic/core';
-import TinderCard from 'react-tinder-card'
+import TinderCard from './TinderCard'
 import PropTypes from "prop-types";
 
 import "./UserCard.css";
@@ -10,46 +10,77 @@ import "./UserCard.css";
 import { User, Gender, Preference } from "../interfaces/User";
 
 interface UserCardProps {
-    user: User
+    user: User,
+    match?: () => void,
+    nope?: () => void,
 }
 
-const UserCard: React.FC<UserCardProps> = ({ user }) => {
+const UserCard: React.FC<UserCardProps> = ({ user, match, nope }) => {
+    const [screen, setScreen] = useState(0);
 
     const onSwipe = (direction) => {
         console.log('You swiped: ' + direction)
+        if(direction === 'left') {
+            if (match) match();
+        } else {
+            if (nope) nope();
+        }
     }
 
     const onCardLeftScreen = (myIdentifier) => {
-        console.log(myIdentifier + ' left the screen')
+        console.log(user._id + ' left the screen')
+    }
+
+    const onLeftSideClick = () => {
+        console.log("left clicked")
+        setScreen(0);
+    }
+
+    const onRightSideClick = () => {
+        console.log("right clicked")
+        setScreen(1);
     }
 
     return (
-        <TinderCard
-            onSwipe={onSwipe}
-            flickOnSwipe={true}
-            onCardLeftScreen={() => onCardLeftScreen('fooBar')}
-        >
-            <IonCard>
-                <img src={user.profilePicture} className="photo" />
-                <IonCardHeader>
-                    {/* <IonCardSubtitle>Big Dick Energy</IonCardSubtitle> */}
-                    <IonCardTitle>{user.name}</IonCardTitle>
-                </IonCardHeader>
+        <div className="user-card">
+            <TinderCard
+                onSwipe={onSwipe}
+                flickOnSwipe={true}
+                onCardLeftScreen={() => onCardLeftScreen('fooBar')}
+                onLeftSideClick={onLeftSideClick}
+                onRightSideClick={onRightSideClick}
+            >
+                <IonCard>
+                    {screen == 0 ?
+                        <>
+                            <div style={{backgroundImage: `url(${user.profilePicture})`}}
+                                className="photo"></div>
+                            <IonCardHeader>
+                                {/* <IonCardSubtitle>Big Dick Energy</IonCardSubtitle> */}
+                                <IonCardTitle className="title">{user.name}</IonCardTitle>
+                            </IonCardHeader>
 
-                <IonCardContent>
-                    {user.description}
-                </IonCardContent>
-
-
-
-                <IonGrid className="grid-full">
-                    <IonRow>
-                        {user.languages.map((language, i) => <IonCol key={i} size="4"><IonChip><IonLabel>{language}</IonLabel></IonChip></IonCol>)}
-                    </IonRow>
-                </IonGrid>
-
-            </IonCard>
-        </TinderCard>);
+                            <IonCardContent className="description">
+                                {user.description}
+                            </IonCardContent>
+                        </>
+                    :
+                        <>
+                            <IonCardContent>
+                                <IonCardSubtitle>Programming Skillz</IonCardSubtitle>
+                                <div className="languages-container">
+                                    {user.languages.map((language, i) => <div className="language" key={i}>{language}</div>)}
+                                </div>
+                            </IonCardContent>
+                            <IonCardContent>
+                                <IonCardSubtitle>Other Info</IonCardSubtitle>
+                            </IonCardContent>
+                        </>
+                    }
+                </IonCard>
+            </TinderCard>
+        </div>
+        );
 };
 
 export default UserCard;

@@ -62,9 +62,10 @@ const Tab1: React.FC = () => {
           </IonFabList>
         </IonFab>*/}
 
-        <UserCard user={user} />
-        <UserCard user={user} />
-        <UserCard user={user} />
+        <div className="usercard-container">
+          <UserCard user={user} />
+          <UserCard user={user} />
+        </div>
       </IonContent>
     </IonPage>
   )

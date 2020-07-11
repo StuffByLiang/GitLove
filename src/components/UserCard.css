@@ -1,0 +1,41 @@
+.user-card {
+  height: calc(100vh - 72px);
+  width: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.user-card ion-card {
+  overflow-y: scroll;
+  height: calc(100vh - 72px);
+}
+
+.user-card ion-card .photo {
+  height: 70%;
+  background-size: cover;
+}
+
+.user-card ion-card .languages-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.user-card ion-card .languages-container .language {
+  margin-right: 10px;
+  margin-bottom: 4px;
+  font-size: 1rem;
+  background-color: #C5DCFC;
+  border-radius: 4px;
+}
+
+.user-card ion-card .title {
+  font-size: 2rem;
+}
+
+.user-card ion-card .description {
+  font-size: 1rem;
+}
+
+.user-card ion-card-subtitle {
+  font-size: 1.5rem;
+}
