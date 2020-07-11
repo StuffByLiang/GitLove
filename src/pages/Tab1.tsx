@@ -7,6 +7,10 @@ import UserCard from '../components/UserCard';
 import { useSwipeable, Swipeable } from 'react-swipeable'
 import { Gesture, GestureConfig, createGesture } from '@ionic/core';
 
+import { User, Gender } from "../interfaces/User";
+
+import FindService from '../services/FindService';
+
 const config = {
   onSwipedLeft: () => console.log("Swiped Left"),
   onSwipedRight: () => console.log("Swiped Right"),
@@ -15,6 +19,17 @@ const config = {
 };
 
 const Tab1: React.FC = () => {
+  const user: User = {
+    _id: "69",
+    name: "Vishal Desh",
+    profilePicture: "/assets/images/vishal.jpg",
+    gender: Gender.Male,
+    dateOfBirth: new Date(),
+    description: "Boy with big PP",
+    features: [],
+    preferences: [],
+    languages: ["Python","Java","C++","React","Racket","Angular","Firebase","CSS","HTML","JavaScript","Android Studio"],
+  }
   return (
     <IonPage>
       <IonContent>
@@ -47,4 +62,12 @@ const Tab1: React.FC = () => {
           </IonFabList>
         </IonFab>*/}
 
-        <UserCard />
+        <UserCard user={user} />
+        <UserCard user={user} />
+        <UserCard user={user} />
+      </IonContent>
+    </IonPage>
+  )
+}
+
+export default Tab1;

@@ -1,7 +1,7 @@
 import { IonButton, IonContent, IonFooter, IonPage } from '@ionic/react';
 import React from 'react';
 
-class ChatPage extends React.Component {
+class RunPage extends React.Component {
 
     componentDidMount() {
         const PhoneScheme: any = window['phonescheme'];
@@ -20,4 +20,4 @@ class ChatPage extends React.Component {
     }
 }
 
-export default ChatPage;
+export default RunPage;

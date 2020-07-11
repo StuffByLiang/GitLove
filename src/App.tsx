@@ -18,7 +18,7 @@ import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
 import CodingPage from './pages/CodingPage';
 import Aiden from './pages/Aiden';
-import ChatPage from './pages/ChatPage';
+import RunPage from './pages/RunPage';
 import Notifications from './pages/Notifications';
 import EditPreferencesPage from './pages/EditPreferencesPage';
 
@@ -52,7 +52,7 @@ const App: React.FC = () => (
           <Route path="/tab3" component={Tab3} />
           <Route path="/coding" component={CodingPage} />
           <Route path="/aiden" component={Aiden} />
-          <Route path="/chat" component={ChatPage} />
+          <Route path="/run" component={RunPage} />
           <Route path="/Notifications" component={Notifications} />
           <Route path="/EditPreferences" component={EditPreferencesPage} />
           <Route path="/" render={() => <Redirect to="/tab1" />} exact={true} />

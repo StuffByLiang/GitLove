@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonList, IonItem, IonLabel, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton} from '@ionic/react';
+import { IonList, IonItem, IonListHeader, IonLabel, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab3.css';
 import { Redirect, Route, Link } from 'react-router-dom';
@@ -8,12 +8,11 @@ import { Redirect, Route, Link } from 'react-router-dom';
 const Tab3: React.FC = () => {
   return (
     <IonPage>
-       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
       <IonHeader>
         <IonToolbar>
           <IonTitle>Settings</IonTitle>
-        </IonToolbar>    
-      </IonHeader></div>
+        </IonToolbar>
+      </IonHeader>
       <IonContent>
         <IonHeader collapse="condense">
           <IonToolbar>
@@ -23,29 +22,33 @@ const Tab3: React.FC = () => {
 
         <IonList>
 
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
-
-            <h3>Manage </h3> </div>
+          <IonListHeader>
+            <IonLabel>Manage</IonLabel>
+          </IonListHeader>
 
           <IonItem button onClick={() => { }}>
-            <IonLabel>Edit Profile Information</IonLabel>
+            <IonLabel >Edit Profile Information</IonLabel>
           </IonItem >
           <IonItem button onClick={() => { }}>
             <IonLabel>Edit Preferences</IonLabel>
           </IonItem>
-          <IonItem button href="/Notifications">
+          <IonItem button routerLink="/Notifications" routerDirection="forward">
             <IonLabel>Notifications</IonLabel>
           </IonItem>
 
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
-            <h3>Contact Us</h3> </div>
+          <IonListHeader>
+            <IonLabel>Contact Us</IonLabel>
+          </IonListHeader>
+
 
           <IonItem button onClick={() => { }}>
             <IonLabel>Help & Support</IonLabel>
           </IonItem >
 
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
-            <h3>Community </h3> </div>
+          <IonListHeader>
+            <IonLabel>Community</IonLabel>
+          </IonListHeader>
+
 
           <IonItem button onClick={() => { }}>
             <IonLabel>View Community Guidelines</IonLabel>
@@ -54,9 +57,11 @@ const Tab3: React.FC = () => {
             <IonLabel>Safety Tips</IonLabel>
           </IonItem>
 
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
-            <h3>Documentation For User </h3> </div>
-            <IonItem button onClick={() => { }}>
+          <IonListHeader>
+            <IonLabel>Documentation for User</IonLabel>
+          </IonListHeader>
+
+          <IonItem button onClick={() => { }}>
             <IonLabel>Our Application guide</IonLabel>
           </IonItem>
           <IonItem button href="https://docs.racket-lang.org/">
@@ -64,8 +69,10 @@ const Tab3: React.FC = () => {
           </IonItem>
 
 
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
-            <h3>Legal </h3> </div>
+          <IonListHeader>
+            <IonLabel>Legal</IonLabel>
+          </IonListHeader>
+
 
           <IonItem button onClick={() => { }}>
             <IonLabel>View Privacy Policy</IonLabel>

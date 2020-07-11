@@ -1,13 +1,19 @@
 export class Binding {
     private functionName: string;
     private eventHandler: (arg: Array<string>) => any;
+    private minArgs: number = 0;
+    private maxArgs: number = 0;
 
     constructor(
         functionName: string,
-        eventHandler: (arg: Array<string>) => any
+        eventHandler: (arg: Array<string>) => any,
+        minArgs: number,
+        maxArgs: number
     ) {
         this.functionName = functionName;
         this.eventHandler = eventHandler;
+        this.minArgs = minArgs;
+        this.maxArgs = maxArgs;
     }
 
     /**

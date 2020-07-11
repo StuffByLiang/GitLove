@@ -7,68 +7,47 @@ import PropTypes from "prop-types";
 
 import { User, Gender, Preference } from "../interfaces/User";
 
-interface Props {
+interface UserCardProps {
     user: User
 }
 
-const UserCard: React.FC = (props) => {
-    // const {user: User} = props;
-    
+const UserCard: React.FC<UserCardProps> = ({ user }) => {
+
     const onSwipe = (direction) => {
         console.log('You swiped: ' + direction)
-      }
-      
-      const onCardLeftScreen = (myIdentifier) => {
+    }
+
+    const onCardLeftScreen = (myIdentifier) => {
         console.log(myIdentifier + ' left the screen')
-      }
-    
-    return <TinderCard
-                onSwipe={onSwipe}
-                flickOnSwipe={true}
-                onCardLeftScreen={() => onCardLeftScreen('fooBar')}
-            >
-        <IonCard>
-            <img src="/assets/images/vishal.jpg" className="photo" />
-            <IonCardHeader>
-                <IonCardSubtitle>Big Dick Energy</IonCardSubtitle>
-                <IonCardTitle>Vishal Desh</IonCardTitle>
-            </IonCardHeader>
+    }
 
-            <IonCardContent>
-                Big boi with Big PP
-            </IonCardContent>
+    return (
+        <TinderCard
+            onSwipe={onSwipe}
+            flickOnSwipe={true}
+            onCardLeftScreen={() => onCardLeftScreen('fooBar')}
+        >
+            <IonCard>
+                <img src={user.profilePicture} className="photo" />
+                <IonCardHeader>
+                    {/* <IonCardSubtitle>Big Dick Energy</IonCardSubtitle> */}
+                    <IonCardTitle>{user.name}</IonCardTitle>
+                </IonCardHeader>
+
+                <IonCardContent>
+                    {user.description}
+                </IonCardContent>
 
 
 
-            <IonGrid className="grid-full">
-                <IonRow>
-                    <IonCol size="4"><IonChip><IonLabel>Python</IonLabel></IonChip></IonCol>
-                    <IonCol size="4"><IonChip><IonLabel>Java</IonLabel></IonChip></IonCol>
-                    <IonCol size="4"><IonChip><IonLabel>C++</IonLabel></IonChip></IonCol>
-                    <IonCol size="4"><IonChip><IonLabel>React</IonLabel></IonChip></IonCol>
-                    <IonCol size="4"><IonChip><IonLabel>Racket</IonLabel></IonChip></IonCol>
-                    <IonCol size="4"><IonChip><IonLabel>Angular</IonLabel></IonChip></IonCol>
-                    <IonCol size="4"><IonChip><IonLabel>Firebase</IonLabel></IonChip></IonCol>
-                    <IonCol size="4"><IonChip><IonLabel>CSS</IonLabel></IonChip></IonCol>
-                    <IonCol size="4"><IonChip><IonLabel>HTML</IonLabel></IonChip></IonCol>
-                    <IonCol size="4"><IonChip><IonLabel>JavaScript</IonLabel></IonChip></IonCol>
-                    <IonCol size="4"><IonChip><IonLabel>Android Studio</IonLabel></IonChip></IonCol>
-                </IonRow>
-            </IonGrid>
+                <IonGrid className="grid-full">
+                    <IonRow>
+                        {user.languages.map((language, i) => <IonCol key={i} size="4"><IonChip><IonLabel>{language}</IonLabel></IonChip></IonCol>)}
+                    </IonRow>
+                </IonGrid>
 
-        </IonCard>
-    </TinderCard>;
-};
-
-UserCard.propTypes = {
-    user: PropTypes.object
-}
-                    <IonCol size="4"><IonChip><IonLabel>Android Studio</IonLabel></IonChip></IonCol>
-                </IonRow>
-            </IonGrid>
-
-        </IonCard>
-    </TinderCard>;
+            </IonCard>
+        </TinderCard>);
 };
 
 export default UserCard;

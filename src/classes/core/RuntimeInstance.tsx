@@ -1,4 +1,7 @@
-import { PhoneScheme } from '../services/PhoneScheme';
+import { library } from 'ionicons/icons';
+import { PhoneScheme } from '../../services/PhoneScheme';
+import { Binding } from './Binding';
+import { Library } from './Library';
 
 // λ ooh baby ;)
 export class RuntimeInstance {
@@ -36,13 +39,28 @@ export class RuntimeInstance {
         this.psi.evaluate(script, (result) => {});
     }
 
-
-
+    /**
+     * Adds a single binding
+     * @param binding Binding to be added
+     */
+    addBinding(binding: Binding): void {
+        PhoneScheme
+    }
 
     /**
-     * Terminates the runtime environment
+     * 
+     * @param bindings 
      */
-    destroy() {
+    addLibrary(library: Library): void  {
+        library
+            .getBindings()
+            .forEach((binding) => this.addBinding(binding));
+    }
+
+    /**
+     * Terminates the runtime environment, and creates a fresh one
+     */
+    reset() {
         delete this.psi;
     }
 
