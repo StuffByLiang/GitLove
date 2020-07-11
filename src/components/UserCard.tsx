@@ -20,7 +20,7 @@ const UserCard: React.FC<UserCardProps> = ({ user, like, nope }) => {
 
     const onSwipe = (direction) => {
         console.log('You swiped: ' + direction)
-        if(direction === 'left') {
+        if(direction === 'right') {
             if (like) like(user._id);
         } else {
             if (nope) nope(user._id);

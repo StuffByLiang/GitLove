@@ -14,6 +14,7 @@ export interface User {
     languages: Array<string>;
     blockedUsers: Array<string>;
     likedUsers: Array<string>;
+    nopedUsers: Array<string>;
 }
 
 export enum Gender {

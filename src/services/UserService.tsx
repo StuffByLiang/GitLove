@@ -47,6 +47,7 @@ class UserService {
                             languages: obj['languages'],
                             blockedUsers: obj['blockedUsers'],
                             likedUsers: obj['likedUsers'],
+                            nopedUsers: obj['nopedUsers'],
                         };
                         this.userDoc$.next({
                             _id: obj['_id'],
@@ -59,6 +60,7 @@ class UserService {
                             languages: obj['languages'],
                             blockedUsers: obj['blockedUsers'],
                             likedUsers: obj['likedUsers'],
+                            nopedUsers: obj['nopedUsers'],
                         });
                         this.setupStreams();
                     } else {
@@ -91,6 +93,7 @@ class UserService {
                             languages: obj['languages'],
                             blockedUsers: obj['blockedUsers'],
                             likedUsers: obj['likedUsers'],
+                            nopedUsers: obj['nopedUsers'],
                         };
                         this.userDoc$.next({
                             _id: obj['_id'],
@@ -103,13 +106,14 @@ class UserService {
                             languages: obj['languages'],
                             blockedUsers: obj['blockedUsers'],
                             likedUsers: obj['likedUsers'],
+                            nopedUsers: obj['nopedUsers'],
                         });
                 }
             })
     }
 
     isLoggedIn(): boolean {
-        return this.userDoc !== undefined;
+        return firebase.auth().currentUser !== null;
     }
 }
 

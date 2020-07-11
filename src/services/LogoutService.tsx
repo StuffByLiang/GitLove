@@ -1,7 +1,7 @@
 import * as firebase from 'firebase';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../interfaces/User';
-import FindService from '../services/FindService';
+import { getUserService } from './GetUserService';
 import { Subscription } from 'rxjs';
 import { userService } from './UserService';
 

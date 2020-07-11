@@ -3,21 +3,17 @@ import { BehaviorSubject } from 'rxjs';
 import { User } from '../interfaces/User';
 
 
-class FindService {
+class GetUserService {
 
     users: Array<User>
 
     usersRef: firebase.firestore.CollectionReference;
     Users$: BehaviorSubject<Array<User>> = new BehaviorSubject([]);
 
-
-    constructor() {
+    init() {
         this.usersRef = firebase
             .firestore()
             .collection('Users');
-    }
-
-    init() {
         return new Promise((resolve, reject) => {
             this.usersRef.onSnapshot(data => {
                 const users = [];
@@ -34,4 +30,5 @@ class FindService {
 
 }
 
-export default FindService;
+window['getUserService'] = new GetUserService();
+export const getUserService = window['getUserService'];
