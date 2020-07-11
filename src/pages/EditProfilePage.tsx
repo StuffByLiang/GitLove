@@ -56,8 +56,9 @@ class EditProfilePage extends React.Component<any, EditProfilePageState> {
             case true:
                 console.log("here");
                 const newDob = new Date(target.value);
-                console.log(newDob);
-                value = target.value
+                console.log(newDob.getSeconds());
+                //value = target.value
+                value = firebase.firestore.Timestamp.fromDate(newDob);
                 break;
             default:
                 value = target.value;
@@ -123,7 +124,7 @@ class EditProfilePage extends React.Component<any, EditProfilePageState> {
                                     </IonItem>
                                     <IonItem>
                                         <IonLabel></IonLabel>
-                                        <IonDatetime displayFormat="YYYY-MM-DD" value={dobString} onIonChange={this.handleChange}/>
+                                        <IonDatetime name="dateOfBirth" displayFormat="YYYY-MM-DD" value={dobString} onIonChange={this.handleChange}/>
                                     </IonItem>
                                     <IonItem>
                                         <IonLabel>Description: </IonLabel>

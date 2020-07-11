@@ -17,7 +17,9 @@ const HomePage: React.FC = () => {
     const history = useHistory();
     const location = useLocation<any>();
 
-    if(userService.isLoggedIn()) history.push(location.state.from);
+    let redirectTo = location.state === undefined ? '/swipe' : location.state.from;
+
+    if(userService.isLoggedIn()) history.push(redirectTo);
 
     return ( 
         <>

@@ -8,7 +8,7 @@ import { RuntimeInstance } from './classes/core/RuntimeInstance';
 import { userService } from './services/UserService';
 import { getUserService } from './services/GetUserService';
 
-//
+
 firebase.initializeApp({
     apiKey: 'AIzaSyAn3jb0unKrsVBsoi8ktx2wPIsbgROgxzM',
     authDomain: 'newhackwhothis2020.firebaseapp.com',

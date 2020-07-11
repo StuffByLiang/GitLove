@@ -41,12 +41,16 @@ class SwipePage extends React.Component {
 
     this.usersSub$ = getUserService.Users$
       .subscribe(data => {
-        this.setState({
-          // let currentUserId = userService.userDoc._id;
-          // let blockedUsers = userService.userDoc.blockedUsers;
-          // let likedUsers = userService.userDoc.likedUsers;
+        data = data.filter((user: User) => {
+          console.log(data, user)
+          let currentUserId = userService.userDoc._id;
+          let blockedUsers = userService.userDoc.blockedUsers;
+          let likedUsers = userService.userDoc.likedUsers;
 
-          // return !likedUsers.includes(user._id) && !blockedUsers.includes(user._id) && user._id != currentUserId;
+          return !likedUsers.includes(user._id) && !blockedUsers.includes(user._id) && user._id != currentUserId;
+        })
+
+        this.setState({
           users: data,
         })
       })

@@ -31,4 +31,4 @@ class GetUserService {
 }
 
 window['getUserService'] = new GetUserService();
-export const getUserService = window['getUserService'];
+export const getUserService: GetUserService = window['getUserService'];
