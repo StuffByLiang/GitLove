@@ -107,9 +107,14 @@ class UserService {
                 }
             })
     }
+
+    isLoggedIn(): boolean {
+        return this.userDoc !== undefined;
+    }
 }
 
-export default UserService;
+window['userService'] = new UserService();
+export const userService: UserService = window['userService'];
 
 /*
 

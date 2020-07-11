@@ -5,9 +5,9 @@ import * as serviceWorker from './serviceWorker';
 import * as firebase from 'firebase';
 import { loginService } from './services/LoginService';
 import { RuntimeInstance } from './classes/core/RuntimeInstance';
-import UserService from './services/UserService';
+import { userService } from './services/UserService';
 
-
+//
 firebase.initializeApp({
     apiKey: 'AIzaSyAn3jb0unKrsVBsoi8ktx2wPIsbgROgxzM',
     authDomain: 'newhackwhothis2020.firebaseapp.com',
@@ -16,14 +16,6 @@ firebase.initializeApp({
     storageBucket: 'newhackwhothis2020.appspot.com',
     messagingSenderId: '770074228861',
     appId: '1:770074228861:web:4392d3f41eeb41756ed914'
-});
-
-window['myUserService'] = new UserService();
-
-firebase.auth().onAuthStateChanged(user => {
-    console.log(user);
-    window['myUserService'].init(user.uid);
-    console.log("this shit ran");
 });
 
 ReactDOM.render(<App />, document.getElementById('root'));

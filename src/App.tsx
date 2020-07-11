@@ -1,5 +1,5 @@
-import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import {
   IonApp,
   IonIcon,
@@ -7,7 +7,7 @@ import {
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
-  IonTabs
+  IonTabs,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { toggle, chatbox, settings } from 'ionicons/icons';
@@ -43,41 +43,66 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import PrivateRoute from './components/PrivateRoute';
+import { userService } from './services/UserService';
+import firebase from 'firebase';
 
-const App: React.FC = () => (
+const App: React.FC = () => {
+  const [state, updateState] = React.useState(0);
+  const forceUpdate = React.useCallback(() => updateState(state+1), []);
+
+  const init = () => {
+    firebase.auth().onAuthStateChanged(async (user) => {
+      if(user !== null) {
+          console.log(user);
+          await userService.init(user.uid);
+          console.log("update")
+          forceUpdate();
+      }
+    });
+  }
+  
+  useEffect(() => {
+    init();
+  }, []);
+
+  return (
   <IonApp>
     <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route path="/swipe" component={SwipePage} exact={true} />
-          <Route path="/tab2" component={Tab2} exact={true} />
-          <Route path="/settings" component={SettingsPage} />
-          <Route path="/coding" component={CodingPage} />
-          <Route path="/aiden" component={Aiden} />
-          <Route path="/run" component={RunPage} />
-          <Route path="/Notifications" component={Notifications} />
-          <Route path="/EditPreferences" component={EditPreferencesPage} />
-          <Route path="/EditProfile" component={EditProfilePage} />
-          <Route path="/Home" component={HomePage} />
-          <Route path="/" render={() => <Redirect to="/Home" />} exact={true} />
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="swipe" href="/swipe">
-            <IonIcon icon={toggle} />
-            <IonLabel>Swipe</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon icon={chatbox} />
-            <IonLabel>Chat</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="settings" href="/settings">
-            <IonIcon icon={settings} />
-            <IonLabel>Settings</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
+      <Switch>
+        <Route path="/home" component={HomePage} />
+        <Route path="/" render={() => <Redirect to="/home" />} exact={true} />
+        <IonTabs>
+          <IonRouterOutlet>
+            <PrivateRoute path="/swipe" component={SwipePage} exact={true} />
+            <PrivateRoute path="/tab2" component={Tab2} exact={true} />
+            <PrivateRoute path="/settings" component={SettingsPage} />
+            <PrivateRoute path="/coding" component={CodingPage} />
+            <PrivateRoute path="/aiden" component={Aiden} />
+            <PrivateRoute path="/run" component={RunPage} />
+            <PrivateRoute path="/Notifications" component={Notifications} />
+            <PrivateRoute path="/EditPreferences" component={EditPreferencesPage} />
+            <PrivateRoute path="/EditProfile" component={EditProfilePage} />
+          </IonRouterOutlet>
+
+          <IonTabBar slot="bottom">
+            <IonTabButton tab="swipe" href="/swipe">
+              <IonIcon icon={toggle} />
+              <IonLabel>Swipe</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="tab2" href="/tab2">
+              <IonIcon icon={chatbox} />
+              <IonLabel>Chat</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="settings" href="/settings">
+              <IonIcon icon={settings} />
+              <IonLabel>Settings</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+      </Switch>
     </IonReactRouter>
   </IonApp>
-);
+)};
 
 export default App;

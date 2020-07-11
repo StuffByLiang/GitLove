@@ -6,20 +6,17 @@ import UserCard from '../components/UserCard';
 import { logoGithub } from 'ionicons/icons';
 import './HomePage.css';
 import { loginService, LoginService } from '../services/LoginService';
-import { Redirect, Route, Link } from 'react-router-dom';
+import { Redirect, Route, Link, useHistory } from 'react-router-dom';
 import * as firebase from 'firebase';
+import { userService } from '../services/UserService';
+import { take } from 'rxjs/operators';
 
 const ls: LoginService = loginService;
 
 const HomePage: React.FC = () => {
+    const history = useHistory();
 
-    // TODO: Is this working?
-    const redirectToSwipe = () => {
-        // Let's fucking go!
-        return <Redirect to="/Home" />
-    };
-
-    const isAlreadyLoggedIn = () => !!firebase.auth().currentUser;
+    if(userService.isLoggedIn()) history.push('/swipe');
 
     return ( 
         <>

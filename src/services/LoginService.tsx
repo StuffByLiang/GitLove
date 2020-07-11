@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { User } from '../interfaces/User';
 import FindService from '../services/FindService';
 import { Subscription } from 'rxjs';
-import UserService from './UserService';
+import {userService} from './UserService';
 import IonAlert from '@ionic/react';
 
 export class LoginService {
@@ -66,9 +66,6 @@ export class LoginService {
             console.error("WHAT THE BLOODY FUCK", error);
         }
     }
-
-
-
 
 }
 
