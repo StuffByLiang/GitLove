@@ -43,7 +43,7 @@ export class LoginService {
                         name: user.displayName,
                         profilePicture: user.photoURL,
                         gender: null,
-                        dateOfBirth: null,
+                        dateOfBirth: new firebase.firestore.Timestamp(0, 0),
                         description: null,
                         features: null,
                         languages: [],
@@ -62,7 +62,7 @@ export class LoginService {
         try {
             await firebase.auth().signOut();
         } catch (error) {
-            console.error("WHAT THE BLOODY FUCK", error);
+            console.error("Logout Error", error);
         }
     }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import {
-    IonContent, IonHeader, IonInput, IonTextarea, IonToggle, IonList, IonListHeader, IonPage, IonChip, IonTitle, IonToolbar, IonCard, IonGrid, IonRow, IonCol,
-    IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton, IonBackButton, IonButtons, IonSelect, IonSelectOption
+    IonContent, IonHeader, IonInput, IonTextarea, IonList, IonPage, IonToolbar,
+    IonItem, IonLabel, IonButton, IonBackButton, IonButtons, IonSelect, IonSelectOption, IonDatetime
 } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import UserCard from '../components/UserCard';
@@ -51,12 +51,23 @@ class EditProfilePage extends React.Component<any, EditProfilePageState> {
     handleChange(event: any) {
         const target = event.target;
         const name = target.name;
-        const value = target.value;
+        let value;
+        switch(true) {
+            case true:
+                console.log("here");
+                const newDob = new Date(target.value);
+                console.log(newDob);
+                value = target.value
+                break;
+            default:
+                value = target.value;
+        }
+
 
         const user = this.state.user;
 
         user[name] = value;
-
+        console.log(value);
         this.setState({
             user: user,
         });
@@ -72,7 +83,15 @@ class EditProfilePage extends React.Component<any, EditProfilePageState> {
 
     render() {
         const user = this.state.user;
-        const gender = "test"; //REMOVE THIS LATER
+        let dobString = "error"; // this shouldn't display ever
+        if (user) {
+            let dob = user.dateOfBirth.toDate();
+            let year = dob.getFullYear().toString();
+            let month = (dob.getMonth() + 1).toString();
+            let day = dob.getDay().toString();
+            dobString = year + "-" + month + "-" + day;
+            console.log(dobString);
+        }
 
         return (
             <>
@@ -86,17 +105,25 @@ class EditProfilePage extends React.Component<any, EditProfilePageState> {
                     </IonHeader>
                     <IonContent>
                         <IonList>
-                            {this.state.user ?
+                            {user ?
                                 <form>
                                     <IonItem>
                                         <IonLabel>Name: </IonLabel>
-                                        <IonInput value={this.state.user.name} type="text" name="name" onIonChange={this.handleChange}></IonInput>
+                                        <IonInput value={user.name} type="text" name="name" onIonChange={this.handleChange}></IonInput>
                                     </IonItem>
                                     <IonItem>
                                         <IonLabel>Gender: </IonLabel>
-                                        <IonSelect value={user.gender} okText="Yup" cancelText="nope">
-                                            <IonSelectOption value="b">Male</IonSelectOption>
+                                        <IonSelect name="gender" value={user.gender} okText="Yup" cancelText="nope" onIonChange={this.handleChange}>
+                                            <IonSelectOption value={0}>Male</IonSelectOption>
+                                            <IonSelectOption value={1}>Female</IonSelectOption>
+                                            <IonSelectOption value={2}>NonBinary</IonSelectOption>
+                                            <IonSelectOption value={3}>Agender</IonSelectOption>
+                                            <IonSelectOption value={4}>Other</IonSelectOption>
                                         </IonSelect>
+                                    </IonItem>
+                                    <IonItem>
+                                        <IonLabel></IonLabel>
+                                        <IonDatetime displayFormat="YYYY-MM-DD" value={dobString} onIonChange={this.handleChange}/>
                                     </IonItem>
                                     <IonItem>
                                         <IonLabel>Description: </IonLabel>
@@ -106,7 +133,7 @@ class EditProfilePage extends React.Component<any, EditProfilePageState> {
                                     <IonButton onClick={this.handleSave}>Save</IonButton>
                                 </form>
                                 :
-                                <div><h1>Please wait or renavigate to login</h1></div>
+                                <div><h1>Please wait...</h1></div>
                             }
                         </IonList>
                     </IonContent>

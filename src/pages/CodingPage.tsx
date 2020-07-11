@@ -13,13 +13,13 @@ const CodingPage: React.FC = () => {
         <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <IonTitle>Editor</IonTitle>
+                    <IonTitle>Code Editor</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>
                 <IonHeader collapse="condense">
                     <IonToolbar>
-                        <IonTitle size="large">Settings</IonTitle>
+                        <IonTitle size="large">Code Editor</IonTitle>
                     </IonToolbar>
                 </IonHeader>
                 <CodeEditor codeScope="test"></CodeEditor>

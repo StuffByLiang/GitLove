@@ -1,7 +1,7 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "NewHacksWhoThis",
-  "bundledWebRuntime": false,
+  "appId": "io.github.TheD3vel0per.GitLove",
+  "appName": "GitLove",
+  "bundledWebRuntime": true,
   "npmClient": "npm",
   "webDir": "build",
   "plugins": {
