@@ -5,6 +5,8 @@ import { Gesture, GestureConfig, createGesture } from '@ionic/core';
 import TinderCard from 'react-tinder-card'
 import PropTypes from "prop-types";
 
+import "./UserCard.css";
+
 import { User, Gender, Preference } from "../interfaces/User";
 
 interface UserCardProps {
