@@ -13,7 +13,7 @@ interface EditProfilePageState {
     user: User
 }
 
-class EditProfilePage extends React.Component<EditProfilePageState> {
+class EditProfilePage extends React.Component<any, EditProfilePageState> {
 
     subscription: Subscription;
 
@@ -27,7 +27,14 @@ class EditProfilePage extends React.Component<EditProfilePageState> {
     componentDidMount() {
         const myUserService: UserService = window['myUserService'];
         this.subscription = myUserService.userDoc$.subscribe((user: User) => {
-            this.setState({ user : user });
+            
+            if (user) {
+                this.setState({ user : user });
+            } else {
+                this.setState({
+                    user: null, 
+                });
+            }
         });
     }
 
@@ -41,7 +48,7 @@ class EditProfilePage extends React.Component<EditProfilePageState> {
         const value = target.value;
 
         this.setState({
-            [name]: value,
+            displayName: value,
         })
     }
     
@@ -76,20 +83,23 @@ class EditProfilePage extends React.Component<EditProfilePageState> {
                                 <IonLabel slot="end">this.Gender</IonLabel>
     
                             </IonItem> */}
-
-                            <form>
-                                <IonItem>
-                                    <IonLabel>Name</IonLabel>
-                                    <IonLabel slot="end"> {this.state.displayName} </IonLabel>
-                                    <IonInput type="text" name="displayName" onChange={this.handleChange}></IonInput>
-                                </IonItem>
-                            <IonItem>
-                                <IonLabel>Description</IonLabel>
-                                <IonLabel slot="end"> {this.state.description} </IonLabel>
-                                <IonTextarea name="description" onChange={this.handleChange}></IonTextarea>
-                            </IonItem>
-                            <IonButton type="submit">Add Todo</IonButton>
-                            </form> 
+                            if (user) {
+                                <form>
+                                    <IonItem>
+                                        <IonLabel>Name</IonLabel>
+                                        <IonLabel slot="end"> {this.state} </IonLabel>
+                                        <IonInput type="text" name="displayName" onChange={this.handleChange}></IonInput>
+                                    </IonItem>
+                                    <IonItem>
+                                        <IonLabel>Description</IonLabel>
+                                        <IonLabel slot="end"> {this.state.description} </IonLabel>
+                                        <IonTextarea name="description" onChange={this.handleChange}></IonTextarea>
+                                    </IonItem>
+                                    <IonButton type="submit">Add Todo</IonButton>
+                                </form>
+                            } else {
+                                <div>pls log in :D</div>
+                            }
                         </IonList>
                     </IonContent>
                 </IonPage>

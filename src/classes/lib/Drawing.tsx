@@ -15,7 +15,7 @@ export class DrawingLibrary extends Library {
         // Color
         this.addBinding(new Binding(
             'color',
-            this.setColor,
+            this.setColor.bind(this),
             1,
             1
         ));
@@ -23,7 +23,7 @@ export class DrawingLibrary extends Library {
         // Draw Rectancle
         this.addBinding(new Binding(
             'rect',
-            this.drawRect,
+            this.drawRect.bind(this),
             4,
             4
         ));
@@ -46,7 +46,8 @@ export class DrawingLibrary extends Library {
      * @param args
      */
     drawRect([x, y, width, height]) {
-        this.context.rect(x, y, width, height);
+        console.log(this, [x, y, width, height]);
+        this.context.fillRect(x, y, width, height);
     }
 
 }

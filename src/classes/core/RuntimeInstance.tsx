@@ -53,7 +53,7 @@ export class RuntimeInstance {
             binding.getFunctionName(),
             binding.getMinArgs(),
             binding.getMaxArgs(),
-            binding.getEventHandler()
+            (args) => binding.getEventHandler()(args)
         );
     }
 
