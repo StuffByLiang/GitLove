@@ -21,6 +21,9 @@ firebase.initializeApp({
 
 getUserService.init();
 
+window['code'] = `(heart)
+(sendLove 10 160 "english")`;
+
 ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

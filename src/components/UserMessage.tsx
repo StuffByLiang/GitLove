@@ -5,39 +5,49 @@ import { filter, mergeAll, take } from 'rxjs/operators';
 import { Gender, User } from '../interfaces/User';
 import { getUserService } from '../services/GetUserService';
 import ChatPage from '../components/ChatMessage'
+import { Match } from '../interfaces/Match';
 
 //inclde firebase
 
-class UserMessage extends React.Component {
+interface UserMessageState {
+    user: User,
+    match: Match
+}
 
+interface UserMessageProps {
+    match: Match
+}
 
-    state = {
-        user: {
-            _id: '',
-            name: 'string',
-            profilePicture: '',
-            gender: Gender.Male,
-            dateOfBirth: new firebase.firestore.Timestamp(0, 0),
-            description: '',
-            features: [],
-            languages: [],
-            blockedUsers: [],
-            likedUsers: [],
-        },
-        match : {
-            _id: '',
-            matchedUsers: ['foo', 'bar'],
-            message: {
-                authorUid: '',
-                code: '',
-            },
-            lastMatchActivity: new firebase.firestore.Timestamp(0, 0)
-        }
-    }
+class UserMessage extends React.Component<UserMessageProps, UserMessageState> {
 
     constructor(props) {
         super(props);
-        this.state.match = props['match'];
+        this.state = {
+            user: {
+                _id: '',
+                name: 'string',
+                profilePicture: '',
+                gender: Gender.Male,
+                dateOfBirth: new firebase.firestore.Timestamp(0, 0),
+                description: '',
+                features: [],
+                languages: [],
+                blockedUsers: [],
+                likedUsers: [],
+                nopedUsers: []
+            },
+            match: props.match
+            // match : {
+            //     _id: '',
+            //     matchedUsers: ['foo', 'bar'],
+            //     message: {
+            //         authorUid: '',
+            //         code: '',
+            //     },
+            //     lastMatchActivity: new firebase.firestore.Timestamp(0, 0)
+            // }
+        }
+        // this.state.match = props.match;
     }
 
     componentDidMount() {
@@ -53,7 +63,7 @@ class UserMessage extends React.Component {
             )
             .subscribe(data => {
                 this.setState({
-                    match: data
+                    user: data
                 });
             });
     }

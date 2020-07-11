@@ -22,7 +22,7 @@ class RunPage extends React.Component {
         RuntimeEnvironment.addLibrary(new AnimateLibrary(this.animateRef.current));
 
         // Run Script!
-        RuntimeEnvironment.runScript(window['code-test']);
+        RuntimeEnvironment.runScript(window['code']);
 
     }
 

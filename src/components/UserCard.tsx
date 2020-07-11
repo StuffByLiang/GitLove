@@ -11,8 +11,8 @@ import { User, Gender } from "../interfaces/User";
 
 interface UserCardProps {
     user: User,
-    like?: (_id: string) => void,
-    nope?: (_id: string) => void,
+    like?: (user: User) => void,
+    nope?: (user: User) => void,
 }
 
 const UserCard: React.FC<UserCardProps> = ({ user, like, nope }) => {
@@ -21,9 +21,9 @@ const UserCard: React.FC<UserCardProps> = ({ user, like, nope }) => {
     const onSwipe = (direction) => {
         console.log('You swiped: ' + direction)
         if(direction === 'right') {
-            if (like) like(user._id);
+            if (like) like(user);
         } else {
-            if (nope) nope(user._id);
+            if (nope) nope(user);
         }
     }
 
@@ -56,7 +56,7 @@ const UserCard: React.FC<UserCardProps> = ({ user, like, nope }) => {
                             <div style={{backgroundImage: `url(${user.profilePicture})`}}
                                 className="photo"></div>
                             <IonCardHeader>
-                                {/* <IonCardSubtitle>Big Dick Energy</IonCardSubtitle> */}
+                                {/* <IonCardSubtitle></IonCardSubtitle> */}
                                 <IonCardTitle className="title">{user.name}</IonCardTitle>
                             </IonCardHeader>
 

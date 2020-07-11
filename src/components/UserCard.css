@@ -1,12 +1,18 @@
+.usercard-container {
+  height: calc(100vh - 92px);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
 .user-card {
   height: calc(100vh - 92px);
   width: 100%;
   position: absolute;
+  max-width: 600px;
   top: 0;
 }
 
 .user-card ion-card {
-  overflow-y: scroll;
   height: calc(100vh - 92px);
   margin-bottom: 0;
 }

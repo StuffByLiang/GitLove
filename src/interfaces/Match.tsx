@@ -1,6 +1,6 @@
 export interface Match {
     _id: string;
-    matchedUsers: Array<string>;
+    matchedUsers: [string, string];
     message: Message;
     lastMatchActivity: firebase.firestore.Timestamp;
 }

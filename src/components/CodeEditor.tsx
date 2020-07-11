@@ -5,11 +5,11 @@ import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-javascript';
 import { text } from 'ionicons/icons';
 
-const CodeEditor = ({ codeScope }) => {
+const CodeEditor = () => {
 
-    const [code, codeSet] = React.useState('(alert "Hey there!")');
+    const [code, codeSet] = React.useState(window['code']);
     const editorUpdate = (text) => {
-        window['code-'+codeScope] = text;
+        window['code'] = text;
         codeSet(text);
     };
 

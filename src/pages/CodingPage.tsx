@@ -22,7 +22,7 @@ const CodingPage: React.FC = () => {
                         <IonTitle size="large">Code Editor</IonTitle>
                     </IonToolbar>
                 </IonHeader>
-                <CodeEditor codeScope="test"></CodeEditor>
+                <CodeEditor></CodeEditor>
 
                 <IonGrid>
                     <IonRow>

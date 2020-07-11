@@ -45,12 +45,22 @@ export class LoginService {
                         gender: null,
                         dateOfBirth: new firebase.firestore.Timestamp(0, 0),
                         description: null,
-                        features: null,
+                        features: [{
+                            question: "Operating System?",
+                            answer: ""
+                        }, {
+                            question: "Open Source Project?",
+                            answer: ""
+                        }, {
+                            question: "Goals?",
+                            answer: ""
+                        }],
                         languages: [],
                         blockedUsers: [],
                         likedUsers: [],
                         nopedUsers: [],
                     });
+                    userService.init(user.uid);
                 }
 
             });

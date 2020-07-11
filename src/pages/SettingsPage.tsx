@@ -4,10 +4,19 @@ import ExploreContainer from '../components/ExploreContainer';
 import './Tab3.css';
 import { Redirect, Route, Link } from 'react-router-dom';
 import { loginService, LoginService } from '../services/LoginService';
+import { updateUserService } from '../services/UpdateUserService';
+import { userService } from '../services/UserService';
 
 const ls: LoginService = loginService;
 
 const SettingsPage: React.FC = () => {
+  const resetMatches = () => {
+    updateUserService.updateById(userService.userDoc._id, {
+      likedUsers: [],
+      nopedUsers: []
+    });
+  }
+
   return (
     <IonPage>
       <IonHeader>
@@ -28,13 +37,13 @@ const SettingsPage: React.FC = () => {
             <IonLabel>Manage</IonLabel>
           </IonListHeader>
 
-          <IonItem button routerLink="/EditProfile" routerDirection="forward">
+          <IonItem button routerLink="/edit-profile" routerDirection="forward">
             <IonLabel >Edit Profile Information</IonLabel>
           </IonItem >
           <IonItem button onClick={() => { }}>
             <IonLabel>Edit Preferences</IonLabel>
           </IonItem>
-          <IonItem button routerLink="/Notifications" routerDirection="forward">
+          <IonItem button routerLink="/notifications" routerDirection="forward">
             <IonLabel>Notifications</IonLabel>
           </IonItem>
 
@@ -89,6 +98,7 @@ const SettingsPage: React.FC = () => {
 
         </IonList>
         <IonButton color="primary" expand="block" onClick={ls.logout}>Log out</IonButton>
+        <IonButton color="secondary" expand="block" onClick={resetMatches}>Reset Matches</IonButton>
         <IonButton color="danger" expand="block">Delete Account</IonButton>
 
       </IonContent>

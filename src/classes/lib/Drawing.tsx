@@ -78,6 +78,16 @@ export class DrawingLibrary extends Library {
         ));
 
 
+        // Draw horizontal mirror for a give string
+        // (mirror <str>)
+        this.addBinding(new Binding(
+            'mirror',
+            this.drawMirror.bind(this),
+            3,
+            3
+        ));
+
+
 
         return this;
 
@@ -147,6 +157,15 @@ export class DrawingLibrary extends Library {
         this.context.moveTo(95, 65);
         this.context.arc(90, 65, 5, 0, Math.PI * 2, true);  // Right eye
         this.context.stroke();
+        return PhoneScheme.undef;
+
+    }
+
+
+    drawMirror([x, y, str]) {
+        this.context.scale(-1, 1);
+        this.context.font = '48px serif';
+        this.context.fillText(str, x, y);
         return PhoneScheme.undef;
 
     }

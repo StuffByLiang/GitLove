@@ -9,11 +9,12 @@ import { Gesture, GestureConfig, createGesture } from '@ionic/core';
 
 import { User, Gender } from "../interfaces/User";
 
-import {getUserService} from '../services/GetUserService';
+import { getUserService } from '../services/GetUserService';
 import { Subscription } from 'rxjs';
 import { updateUserService } from '../services/UpdateUserService';
 import { userService } from '../services/UserService';
 import { filter } from 'rxjs/operators';
+import { matchMakerService } from '../services/MatchMakerService';
 
 const config = {
   onSwipedLeft: () => console.log("Swiped Left"),
@@ -25,11 +26,12 @@ const config = {
 class SwipePage extends React.Component {
 
   state = {
-    users: [],
     swipedUsers: [],
+    allUsers: [],
   };
 
   usersSub$: Subscription = new Subscription();
+  userSub$: Subscription = new Subscription()
 
   constructor(props) {
     super(props);
@@ -37,46 +39,63 @@ class SwipePage extends React.Component {
     this.nope = this.nope.bind(this)
   }
 
+  filterUsers(users: Array<User>) {
+    console.log(this.state)
+    let currentUserId = userService.id;
+
+    return users.filter((user: User) => {
+      return !this.state.swipedUsers.includes(user._id) && user._id != currentUserId;
+    }).slice(0, 3)
+  }
+
   async componentDidMount() {
 
     this.usersSub$ = getUserService.Users$
       .subscribe(data => {
-        data = data.filter((user: User) => {
-          console.log(data, user)
-          let currentUserId = userService.userDoc._id;
-          let blockedUsers = userService.userDoc.blockedUsers;
-          let likedUsers = userService.userDoc.likedUsers;
-
-          return !likedUsers.includes(user._id) && !blockedUsers.includes(user._id) && user._id != currentUserId;
-        })
-
-        this.setState({
-          users: data,
-        })
+        if (data !== null) {
+          this.setState({
+            allUsers: data,
+          })
+        }
+        console.log(data)
       })
 
-    console.log(this.state.users);
+    this.userSub$ = userService.userDoc$
+      .subscribe(user => {
+        if (user !== null) {
+          this.setState({
+            swipedUsers: user.likedUsers.concat(user.nopedUsers)
+          })
+        }
+        console.log(user)
+      })
+
   }
 
-  async like(id: string) {
-    let users = this.state.users;
-    // console.log(userService.id)
+  like(user: User) {
     let likedUsers = userService.userDoc.likedUsers;
-    likedUsers.push(id);
-    await updateUserService.updateById(userService.id, {
+    likedUsers.push(user._id);
+    updateUserService.updateById(userService.id, {
       likedUsers
+    });
+    if (user.likedUsers.indexOf(userService.userDoc._id) !== -1){
+      matchMakerService.createNewMatch([userService.userDoc._id, user._id]);
+    }
+  }
+
+  nope(user: User) {
+    let nopedUsers = userService.userDoc.nopedUsers;
+    nopedUsers.push(user._id);
+    updateUserService.updateById(userService.id, {
+      nopedUsers
     });
   }
 
-  async nope(id: string) {
-
-  }
-
   render() {
-    let users
+    let users;
 
-    if (this.state.users)
-      users = this.state.users.map(user => {
+    if (this.state.allUsers)
+      users = this.filterUsers(this.state.allUsers).map(user => {
         return <UserCard
           key={user._id}
           user={user}
