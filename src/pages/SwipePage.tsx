@@ -56,15 +56,15 @@ class SwipePage extends React.Component {
 
   render() {
     let users
-    
-    if(this.state.users)
+
+    if (this.state.users)
       users = this.state.users.map(user => {
-          return <UserCard
-              key={user._id}
-              user={user}
-              like={this.like}
-              nope={this.nope}
-            />
+        return <UserCard
+          key={user._id}
+          user={user}
+          like={this.like}
+          nope={this.nope}
+        />
       });
 
     // remove a user that has been swiped from this array
@@ -73,6 +73,20 @@ class SwipePage extends React.Component {
 
     return (
       <IonPage>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            paddingTop: "25px"
+          }}>
+          <a>
+            <img src="https://fontmeme.com/permalink/200711/d65f91e0d1c92fb0563431c4a2719577.png" className="img4" alt="fancy-fonts" />
+          </a>
+
+
+          <img src="/assets/images/logo.png" className="img3" />
+        </div>
         <IonContent>
 
           {/* Code for Share Button */}
@@ -103,13 +117,15 @@ class SwipePage extends React.Component {
           </IonFabList>
         </IonFab>*/}
 
-        <div className="usercard-container">
-          {users}
-        </div>
-      </IonContent>
-    </IonPage>
-  )
-}
+
+
+          <div className="usercard-container">
+            {users}
+          </div>
+        </IonContent>
+      </IonPage>
+    )
+  }
 
 }
 export default SwipePage;

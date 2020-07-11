@@ -1,5 +1,6 @@
 import React from 'react';
-import { IonContent, IonHeader,IonInput,IonTextarea, IonToggle, IonList, IonListHeader, IonPage, IonChip, IonTitle, IonToolbar, IonCard, IonGrid, IonRow, IonCol, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton } from '@ionic/react';
+import { IonContent, IonHeader,IonInput,IonTextarea, IonToggle, IonList, IonListHeader, IonPage, IonChip, IonTitle, IonToolbar, IonCard, IonGrid, IonRow, IonCol,
+     IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import UserCard from '../components/UserCard';
 import * as firebase from 'firebase';
@@ -8,24 +9,24 @@ import { User } from '../interfaces/User';
 import { Subscription } from 'rxjs';
 
 interface EditProfilePageState {
-    displayName: any,
-    description: any,
     user: User
 }
 
 class EditProfilePage extends React.Component<any, EditProfilePageState> {
 
-    subscription: Subscription;
+    subscription: Subscription = new Subscription();
 
     constructor(props) {
         super(props);
-        const user: firebase.User = firebase.auth().currentUser;
-        
+        this.state = {
+            user: null
+        }
         this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
         const myUserService: UserService = window['myUserService'];
+        console.log(myUserService);
         this.subscription = myUserService.userDoc$.subscribe((user: User) => {
             
             if (user) {
@@ -47,12 +48,19 @@ class EditProfilePage extends React.Component<any, EditProfilePageState> {
         const name = target.name;
         const value = target.value;
 
-        this.setState({
-            displayName: value,
-        })
+        console.log(value);
+        //this.state.user.name = name;
+
     }
-    
+
+    handleSave(event: any) {
+        // write to firebase
+    }
+
+
     render() {
+
+        console.log(this.state.user);
         return (
             <>
                 <IonPage>
@@ -83,23 +91,27 @@ class EditProfilePage extends React.Component<any, EditProfilePageState> {
                                 <IonLabel slot="end">this.Gender</IonLabel>
     
                             </IonItem> */}
-                            if (user) {
+                            {this.state.user?
                                 <form>
                                     <IonItem>
                                         <IonLabel>Name</IonLabel>
-                                        <IonLabel slot="end"> {this.state} </IonLabel>
-                                        <IonInput type="text" name="displayName" onChange={this.handleChange}></IonInput>
+                                        <IonInput value={this.state.user.name} type="text" name="displayName" onChange={this.handleChange}></IonInput>
                                     </IonItem>
                                     <IonItem>
                                         <IonLabel>Description</IonLabel>
-                                        <IonLabel slot="end"> {this.state.description} </IonLabel>
+                                        <IonLabel slot="end"> {this.state.user.description} </IonLabel>
                                         <IonTextarea name="description" onChange={this.handleChange}></IonTextarea>
                                     </IonItem>
-                                    <IonButton type="submit">Add Todo</IonButton>
+                                    <IonItem>
+                                        <IonLabel>Description</IonLabel>
+                                        <IonLabel slot="end"> {this.state.user.description} </IonLabel>
+                                        <IonTextarea name="description" onChange={this.handleChange}></IonTextarea>
+                                    </IonItem>
+                                    <IonButton type="submit" onClick={this.handleSave}>Save</IonButton>
                                 </form>
-                            } else {
-                                <div>pls log in :D</div>
-                            }
+                            :
+                                <div><h1>pls log in :D</h1></div>
+                            }   
                         </IonList>
                     </IonContent>
                 </IonPage>

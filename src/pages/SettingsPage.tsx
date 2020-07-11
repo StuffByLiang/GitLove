@@ -26,7 +26,7 @@ const SettingsPage: React.FC = () => {
             <IonLabel>Manage</IonLabel>
           </IonListHeader>
 
-          <IonItem button onClick={() => { }}>
+          <IonItem button routerLink="/EditProfile" routerDirection="forward">
             <IonLabel >Edit Profile Information</IonLabel>
           </IonItem >
           <IonItem button onClick={() => { }}>

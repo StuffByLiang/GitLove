@@ -5,14 +5,14 @@ import FindService from '../services/FindService';
 import { Subscription } from 'rxjs';
 import UserService from './UserService';
 
-class LoginService {
-
-    
+export class LoginService {
 
     login = async () => {
         const provider = new firebase.auth.GithubAuthProvider();
 
-        firebase.auth().signInWithPopup(provider).then(function(result) {
+        firebase.auth().setPersistence('local');
+        // const result = await firebase.auth().signInWithPopup(provider);
+        firebase.auth().signInWithPopup(provider).then(function (result) {
             // This gives you a GitHub Access Token. You can use it to access the GitHub API.
             let credential = result.credential as firebase.auth.OAuthCredential;
             let token = credential.accessToken;
@@ -20,11 +20,11 @@ class LoginService {
             var user = result.user;
             window['myUserService'] = new UserService(result.user.uid);
             window['myUserService'].init();
-            
+
             console.log(user);
-            
+
             const fs: FindService = new FindService;
-            
+
             const usersRef = fs.usersRef.doc(user.uid);
 
             usersRef.get()
@@ -36,7 +36,7 @@ class LoginService {
                     } else {
                         usersRef.set({
                             _id: user.uid,
-                            name: user.displayName, 
+                            name: user.displayName,
                             profilePicture: user.photoURL,
                             gender: null,
                             dateOfBirth: null,
@@ -44,12 +44,13 @@ class LoginService {
                             features: null,
                             languages: [],
                             blockedUsers: [],
+                            likedUsers: []
                         });
                     }
-                    
+
                 });
 
-        }).catch(function(error) {
+        }).catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -58,23 +59,23 @@ class LoginService {
             // The firebase.auth.AuthCredential type that was used.
             var credential = error.credential;
             // ...
-    });
+        });
     }
 
 
     logout = async () => {
-        firebase.auth().signOut().then(function() {
+        firebase.auth().signOut().then(function () {
             // Sign-out successful.
-          }).catch(function(error) {
+        }).catch(function (error) {
             // An error happened.
             console.error(error);
-          });
+        });
     }
-    
-    
-    
+
+
+
 
 }
 
-
-export default LoginService;
+window['loginService'] = new LoginService();
+export const loginService: LoginService = window['loginService'];

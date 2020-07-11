@@ -4,11 +4,19 @@ import ExploreContainer from '../components/ExploreContainer';
 import UserCard from '../components/UserCard';
 import { logoGithub } from 'ionicons/icons';
 import './HomePage.css';
-import LoginService from '../services/LoginService';
+import { loginService, LoginService } from '../services/LoginService';
+import { Redirect, Route, Link } from 'react-router-dom';
 
-const ls: LoginService = new LoginService();
+const ls: LoginService = loginService;
 
 const HomePage: React.FC = () => {
+
+    // TODO: Is this working?
+    const redirectToSwipe = () => {
+        // Let's fucking go!
+        <Route path="/" render={() => <Redirect to="/Home" />}
+    };
+
     return (
         <>
             <IonPage>
@@ -22,7 +30,7 @@ const HomePage: React.FC = () => {
                         }}>
 
                         <a>
-                            <img src="https://fontmeme.com/permalink/200711/d65f91e0d1c92fb0563431c4a2719577.png" className="img2" alt="fancy-fonts" />
+                            <img src="https://fontmeme.com/permalink/200711/d65f91e0d1c92fb0563431c4a2719577.png" className="img" alt="fancy-fonts" />
 
                         </a>
 
