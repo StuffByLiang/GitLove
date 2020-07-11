@@ -7,23 +7,23 @@ import PropTypes from "prop-types";
 
 import "./UserCard.css";
 
-import { User, Gender, Preference } from "../interfaces/User";
+import { User, Gender } from "../interfaces/User";
 
 interface UserCardProps {
     user: User,
-    match?: () => void,
-    nope?: () => void,
+    like?: (_id: string) => void,
+    nope?: (_id: string) => void,
 }
 
-const UserCard: React.FC<UserCardProps> = ({ user, match, nope }) => {
+const UserCard: React.FC<UserCardProps> = ({ user, like, nope }) => {
     const [screen, setScreen] = useState(0);
 
     const onSwipe = (direction) => {
         console.log('You swiped: ' + direction)
         if(direction === 'left') {
-            if (match) match();
+            if (like) like(user._id);
         } else {
-            if (nope) nope();
+            if (nope) nope(user._id);
         }
     }
 

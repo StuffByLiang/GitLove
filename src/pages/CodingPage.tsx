@@ -27,8 +27,6 @@ const CodingPage: React.FC = () => {
                 <IonButton color="success" expand="block" routerLink="/run">Run</IonButton>
                 <IonButton color="primary" expand="block">Send</IonButton>
 
-
-
             </IonContent>
         </IonPage>
     );

@@ -5,7 +5,7 @@ import './Tab3.css';
 import { Redirect, Route, Link } from 'react-router-dom';
 
 
-const Tab3: React.FC = () => {
+const SettingsPage: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
@@ -94,4 +94,4 @@ const Tab3: React.FC = () => {
   );
 };
 
-export default Tab3;
+export default SettingsPage;

@@ -34,7 +34,9 @@ class UserService {
                             dateOfBirth: obj['dateOfBirth'],
                             description: obj['description'],
                             features: obj['features'],
-                            languages: obj['languages']
+                            languages: obj['languages'],
+                            blockedUsers: obj['blockedUsers'],
+                            likedUsers: obj['likedUsers'],
                         };
                         this.userDoc$.next({
                             _id: obj['_id'],
@@ -44,7 +46,9 @@ class UserService {
                             dateOfBirth: obj['dateOfBirth'],
                             description: obj['description'],
                             features: obj['features'],
-                            languages: obj['languages']
+                            languages: obj['languages'],
+                            blockedUsers: obj['blockedUsers'],
+                            likedUsers: obj['likedUsers'],
                         });
                         this.setupStreams();
                     } else {
@@ -74,7 +78,9 @@ class UserService {
                             dateOfBirth: obj['dateOfBirth'],
                             description: obj['description'],
                             features: obj['features'],
-                            languages: obj['languages']
+                            languages: obj['languages'],
+                            blockedUsers: obj['blockedUsers'],
+                            likedUsers: obj['likedUsers'],
                         };
                         this.userDoc$.next({
                             _id: obj['_id'],
@@ -84,7 +90,9 @@ class UserService {
                             dateOfBirth: obj['dateOfBirth'],
                             description: obj['description'],
                             features: obj['features'],
-                            languages: obj['languages']
+                            languages: obj['languages'],
+                            blockedUsers: obj['blockedUsers'],
+                            likedUsers: obj['likedUsers'],
                         });
                 }
             })
@@ -92,3 +100,21 @@ class UserService {
 }
 
 export default UserService;
+
+/*
+
+
+// component mount
+const us = new UserService('penis');
+const sub$ = us.userDoc$.subscribe(data => {
+    console.log(data);
+    // data is of type User
+});
+
+
+// unmount
+sub$.unsubscribe();
+
+
+
+*/

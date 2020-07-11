@@ -46,12 +46,25 @@ class SwipePage extends React.Component {
     console.log(this.state.users);
   }
 
+  like(id: string) {
+
+  }
+
+  nope(id: string) {
+
+  }
+
   render() {
     let users
     
     if(this.state.users)
       users = this.state.users.map(user => {
-          return <UserCard key={user._id} user={user} />
+          return <UserCard
+              key={user._id}
+              user={user}
+              like={this.like}
+              nope={this.nope}
+            />
       });
 
     // remove a user that has been swiped from this array

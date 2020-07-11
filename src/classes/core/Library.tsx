@@ -5,25 +5,33 @@
 import { Binding } from './Binding';
 
 export class Library {
-  private bindings: Array<Binding> = [];
+    private bindings: Array<Binding> = [];
 
-  constructor() {
-  }
+    constructor() {
+        this.init();
+    }
 
-  /**
-   * Returns all bindings
-   * @returns Bindings
-   */
-  public getBindings(): Array<Binding> {
-    return this.bindings;
-  }
+    /**
+     * Initialize the library
+     */
+    public init(): Library {
+        return this;
+    }
 
-  /**
-   * Adds a binding to a library
-   * @param binding Binding to be added
-   */
-  protected addBinding(binding: Binding): void {
-    this.bindings.push(binding);
-  }
+    /**
+     * Returns all bindings
+     * @returns Bindings
+     */
+    public getBindings(): Array<Binding> {
+        return this.bindings;
+    }
+
+    /**
+     * Adds a binding to a library
+     * @param binding Binding to be added
+     */
+    protected addBinding(binding: Binding): void {
+        this.bindings.push(binding);
+    }
 
 }

@@ -15,7 +15,7 @@ import { toggle, chatbox, settings } from 'ionicons/icons';
 /* All our pages */
 import SwipePage from './pages/SwipePage';
 import Tab2 from './pages/Tab2';
-import Tab3 from './pages/Tab3';
+import SettingsPage from './pages/SettingsPage';
 import CodingPage from './pages/CodingPage';
 import Aiden from './pages/Aiden';
 import RunPage from './pages/RunPage';
@@ -51,7 +51,7 @@ const App: React.FC = () => (
         <IonRouterOutlet>
           <Route path="/swipe" component={SwipePage} exact={true} />
           <Route path="/tab2" component={Tab2} exact={true} />
-          <Route path="/tab3" component={Tab3} />
+          <Route path="/settings" component={SettingsPage} />
           <Route path="/coding" component={CodingPage} />
           <Route path="/aiden" component={Aiden} />
           <Route path="/run" component={RunPage} />
@@ -70,7 +70,7 @@ const App: React.FC = () => (
             <IonIcon icon={chatbox} />
             <IonLabel>Chat</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab3" href="/tab3">
+          <IonTabButton tab="settings" href="/settings">
             <IonIcon icon={settings} />
             <IonLabel>Settings</IonLabel>
           </IonTabButton>

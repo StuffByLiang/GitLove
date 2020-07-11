@@ -10,17 +10,11 @@ export interface User {
         answer: string
     }>;
     languages: Array<string>;
+    blockedUsers: Array<string>;
+    likedUsers: Array<string>;
 }
 
 export enum Gender {
-    Male,
-    Female,
-    NonBinary,
-    Agender,
-    Other
-}
-
-export enum Preference {
     Male,
     Female,
     NonBinary,

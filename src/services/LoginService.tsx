@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { User } from '../interfaces/User';
 import FindService from '../services/FindService';
 import { Subscription } from 'rxjs';
+import UserService from './UserService';
 
 class LoginService {
 
@@ -14,9 +15,11 @@ class LoginService {
         firebase.auth().signInWithPopup(provider).then(function(result) {
             // This gives you a GitHub Access Token. You can use it to access the GitHub API.
             let credential = result.credential as firebase.auth.OAuthCredential;
-            let token = credential.accessToken
+            let token = credential.accessToken;
             // The signed-in user info.
             var user = result.user;
+            window['myUserService'] = new UserService(result.user.uid);
+            window['myUserService'].init();
             
             console.log(user);
             
@@ -40,8 +43,10 @@ class LoginService {
                             description: null,
                             features: null,
                             languages: [],
+                            blockedUsers: [],
                         });
                     }
+                    
                 });
 
         }).catch(function(error) {
@@ -56,6 +61,15 @@ class LoginService {
     });
     }
 
+
+    logout = async () => {
+        firebase.auth().signOut().then(function() {
+            // Sign-out successful.
+          }).catch(function(error) {
+            // An error happened.
+            console.error(error);
+          });
+    }
     
     
     
