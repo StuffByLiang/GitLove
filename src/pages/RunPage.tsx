@@ -4,9 +4,7 @@ import React from 'react';
 class RunPage extends React.Component {
 
     componentDidMount() {
-        const PhoneScheme: any = window['phonescheme'];
-        console.log(new PhoneScheme.Interpreter());
-
+        window['runtimeEnvironment'].runScript(window['code-test']);
     }
 
     render() {

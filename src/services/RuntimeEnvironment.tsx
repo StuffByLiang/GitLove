@@ -1,5 +1,7 @@
 import { RuntimeInstance } from "../classes/core/RuntimeInstance";
 
-const runtimeEnvironment = new RuntimeInstance();
-window['runtimeEnvironment'] = runtimeEnvironment;
-export default runtimeEnvironment;
+window['runtimeEnvironment'] = new RuntimeInstance();
+
+const RuntimeEnvironment = window['runtimeEnvironment'];
+
+export default RuntimeEnvironment;

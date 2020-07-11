@@ -11,6 +11,7 @@ import { User, Gender } from "../interfaces/User";
 
 import FindService from '../services/FindService';
 import { Subscription } from 'rxjs';
+import { filter } from '../../public/phonescheme';
 
 const config = {
   onSwipedLeft: () => console.log("Swiped Left"),
@@ -23,10 +24,11 @@ class SwipePage extends React.Component {
 
   state = {
     users: [],
+    swipedUsers: [],
   };
 
   usersSub$: Subscription = new Subscription();
-  
+
   constructor(props) {
     super(props);
   }
@@ -34,31 +36,25 @@ class SwipePage extends React.Component {
   async componentDidMount() {
     const fs: FindService = new FindService();
     await fs.init();
-    this.usersSub$ = fs.Users$.subscribe(data => {
-      this.setState({
-        users: data,
+    this.usersSub$ = fs.Users$
+      .subscribe(data => {
+        this.setState({
+          users: data,
+        })
       })
-    })
+
     console.log(this.state.users);
   }
 
   render() {
-    const user: User = {
-      _id: "69",
-      name: "Vishal Desh",
-      profilePicture: "/assets/images/vishal.jpg",
-      gender: Gender.Male,
-      dateOfBirth: new Date(),
-      description: "Boy with big PP",
-      features: [],
-      preferences: [],
-      languages: ["Python", "Java", "C++", "React", "Racket", "Angular", "Firebase", "CSS", "HTML", "JavaScript", "Android Studio"],
-    }
+    let users
+    
+    if(this.state.users)
+      users = this.state.users.map(user => {
+          return <UserCard key={user._id} user={user} />
+      });
 
-
-  const users = this.state.users.map(user => {
-    <UserCard key={user._id} user={user} />
-  });
+    // remove a user that has been swiped from this array
 
 
 
@@ -93,8 +89,8 @@ class SwipePage extends React.Component {
             </IonFabButton>
           </IonFabList>
         </IonFab>*/}
+          {users}
 
-        <
         </IonContent>
       </IonPage>
     )

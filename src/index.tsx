@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import * as firebase from 'firebase';
+import { RuntimeInstance } from './classes/core/RuntimeInstance';
 
 firebase.initializeApp({
     apiKey: 'AIzaSyAn3jb0unKrsVBsoi8ktx2wPIsbgROgxzM',
@@ -13,9 +14,6 @@ firebase.initializeApp({
     messagingSenderId: '770074228861',
     appId: '1:770074228861:web:4392d3f41eeb41756ed914'
 });
-
-
-
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

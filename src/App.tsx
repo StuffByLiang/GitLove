@@ -21,6 +21,7 @@ import Aiden from './pages/Aiden';
 import RunPage from './pages/RunPage';
 import Notifications from './pages/Notifications';
 import EditPreferencesPage from './pages/EditPreferencesPage';
+import EditProfilePage from './pages/EditProfilePage';
 import HomePage from './pages/HomePage';
 
 
@@ -56,6 +57,7 @@ const App: React.FC = () => (
           <Route path="/run" component={RunPage} />
           <Route path="/Notifications" component={Notifications} />
           <Route path="/EditPreferences" component={EditPreferencesPage} />
+          <Route path="/EditProfile" component={EditProfilePage} />
           <Route path="/Home" component={HomePage} />
           <Route path="/" render={() => <Redirect to="/Home" />} exact={true} />
         </IonRouterOutlet>
