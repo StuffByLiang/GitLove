@@ -9,7 +9,6 @@ export interface User {
         question: string,
         answer: string
     }>;
-    preferences: Array<Preference>;
     languages: Array<string>;
 }
 

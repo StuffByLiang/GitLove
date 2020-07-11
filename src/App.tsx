@@ -13,7 +13,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import { toggle, chatbox, settings } from 'ionicons/icons';
 
 /* All our pages */
-import Tab1 from './pages/Tab1';
+import SwipePage from './pages/SwipePage';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
 import CodingPage from './pages/CodingPage';
@@ -21,6 +21,8 @@ import Aiden from './pages/Aiden';
 import RunPage from './pages/RunPage';
 import Notifications from './pages/Notifications';
 import EditPreferencesPage from './pages/EditPreferencesPage';
+import EditProfilePage from './pages/EditProfilePage';
+import HomePage from './pages/HomePage';
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -47,7 +49,7 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Route path="/tab1" component={Tab1} exact={true} />
+          <Route path="/swipe" component={SwipePage} exact={true} />
           <Route path="/tab2" component={Tab2} exact={true} />
           <Route path="/tab3" component={Tab3} />
           <Route path="/coding" component={CodingPage} />
@@ -55,10 +57,12 @@ const App: React.FC = () => (
           <Route path="/run" component={RunPage} />
           <Route path="/Notifications" component={Notifications} />
           <Route path="/EditPreferences" component={EditPreferencesPage} />
-          <Route path="/" render={() => <Redirect to="/tab1" />} exact={true} />
+          <Route path="/EditProfile" component={EditProfilePage} />
+          <Route path="/Home" component={HomePage} />
+          <Route path="/" render={() => <Redirect to="/Home" />} exact={true} />
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/tab1">
+          <IonTabButton tab="swipe" href="/swipe">
             <IonIcon icon={toggle} />
             <IonLabel>Swipe</IonLabel>
           </IonTabButton>

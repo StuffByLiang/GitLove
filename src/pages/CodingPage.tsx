@@ -1,9 +1,14 @@
 import React from 'react';
-import { IonList, IonItem, IonLabel, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonList, IonItem, IonLabel, IonContent, IonHeader, IonPage, IonTitle, IonButton, IonToolbar } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import CodeEditor from '../components/CodeEditor';
 
 const CodingPage: React.FC = () => {
+
+    // const setTestCode = () => {
+    //     window['testCode'] = 
+    // };
+
     return (
         <IonPage>
             <IonHeader>
@@ -17,7 +22,12 @@ const CodingPage: React.FC = () => {
                         <IonTitle size="large">Settings</IonTitle>
                     </IonToolbar>
                 </IonHeader>
-                <CodeEditor></CodeEditor>
+                <CodeEditor codeScope="test"></CodeEditor>
+
+                <IonButton color="success" expand="block" routerLink="/run">Run</IonButton>
+                <IonButton color="primary" expand="block">Send</IonButton>
+
+
 
             </IonContent>
         </IonPage>

@@ -34,7 +34,6 @@ class UserService {
                             dateOfBirth: obj['dateOfBirth'],
                             description: obj['description'],
                             features: obj['features'],
-                            preferences: obj['preferences'],
                             languages: obj['languages']
                         };
                         this.userDoc$.next({
@@ -45,7 +44,6 @@ class UserService {
                             dateOfBirth: obj['dateOfBirth'],
                             description: obj['description'],
                             features: obj['features'],
-                            preferences: obj['preferences'],
                             languages: obj['languages']
                         });
                         this.setupStreams();
@@ -76,7 +74,6 @@ class UserService {
                             dateOfBirth: obj['dateOfBirth'],
                             description: obj['description'],
                             features: obj['features'],
-                            preferences: obj['preferences'],
                             languages: obj['languages']
                         };
                         this.userDoc$.next({
@@ -87,7 +84,6 @@ class UserService {
                             dateOfBirth: obj['dateOfBirth'],
                             description: obj['description'],
                             features: obj['features'],
-                            preferences: obj['preferences'],
                             languages: obj['languages']
                         });
                 }

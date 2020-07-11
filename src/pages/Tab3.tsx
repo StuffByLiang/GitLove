@@ -86,7 +86,7 @@ const Tab3: React.FC = () => {
 
 
         </IonList>
-        <IonButton expand="block">Log out</IonButton>
+        <IonButton color="primary" expand="block">Log out</IonButton>
         <IonButton color="danger" expand="block">Delete Account</IonButton>
 
       </IonContent>
