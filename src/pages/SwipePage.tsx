@@ -9,10 +9,11 @@ import { Gesture, GestureConfig, createGesture } from '@ionic/core';
 
 import { User, Gender } from "../interfaces/User";
 
-import FindService from '../services/FindService';
+import {getUserService} from '../services/GetUserService';
 import { Subscription } from 'rxjs';
-import { filter } from '../../public/phonescheme';
 import { updateUserService } from '../services/UpdateUserService';
+import { userService } from '../services/UserService';
+import { filter } from 'rxjs/operators';
 
 const config = {
   onSwipedLeft: () => console.log("Swiped Left"),
@@ -32,14 +33,20 @@ class SwipePage extends React.Component {
 
   constructor(props) {
     super(props);
+    this.like = this.like.bind(this)
+    this.nope = this.nope.bind(this)
   }
 
   async componentDidMount() {
-    const fs: FindService = new FindService();
-    await fs.init();
-    this.usersSub$ = fs.Users$
+
+    this.usersSub$ = getUserService.Users$
       .subscribe(data => {
         this.setState({
+          // let currentUserId = userService.userDoc._id;
+          // let blockedUsers = userService.userDoc.blockedUsers;
+          // let likedUsers = userService.userDoc.likedUsers;
+
+          // return !likedUsers.includes(user._id) && !blockedUsers.includes(user._id) && user._id != currentUserId;
           users: data,
         })
       })
@@ -48,14 +55,16 @@ class SwipePage extends React.Component {
   }
 
   async like(id: string) {
-    // let users = this.state.users;
-    // users.splice(users.indexOf(id), 1);
-    // await updateUserService.updateById(i, {
-    //   likedUsers: users
-    // });
+    let users = this.state.users;
+    // console.log(userService.id)
+    let likedUsers = userService.userDoc.likedUsers;
+    likedUsers.push(id);
+    await updateUserService.updateById(userService.id, {
+      likedUsers
+    });
   }
 
-  nope(id: string) {
+  async nope(id: string) {
 
   }
 

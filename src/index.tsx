@@ -6,6 +6,7 @@ import * as firebase from 'firebase';
 import { loginService } from './services/LoginService';
 import { RuntimeInstance } from './classes/core/RuntimeInstance';
 import { userService } from './services/UserService';
+import { getUserService } from './services/GetUserService';
 
 //
 firebase.initializeApp({
@@ -17,6 +18,8 @@ firebase.initializeApp({
     messagingSenderId: '770074228861',
     appId: '1:770074228861:web:4392d3f41eeb41756ed914'
 });
+
+getUserService.init();
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

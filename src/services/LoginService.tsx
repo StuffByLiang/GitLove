@@ -2,10 +2,10 @@ import * as firebase from 'firebase';
 
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../interfaces/User';
-import FindService from '../services/FindService';
 import { Subscription } from 'rxjs';
 import {userService} from './UserService';
 import IonAlert from '@ionic/react';
+import { getUserService } from './GetUserService';
 
 export class LoginService {
 
@@ -29,9 +29,7 @@ export class LoginService {
 
         console.log(user);
 
-        const fs: FindService = new FindService;
-
-        const usersRef = fs.usersRef.doc(user.uid);
+        const usersRef = getUserService.usersRef.doc(user.uid);
 
         usersRef.get()
             .then((docSnapshot) => {
@@ -50,7 +48,8 @@ export class LoginService {
                         features: null,
                         languages: [],
                         blockedUsers: [],
-                        likedUsers: []
+                        likedUsers: [],
+                        nopedUsers: [],
                     });
                 }
 
