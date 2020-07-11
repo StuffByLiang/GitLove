@@ -10,16 +10,26 @@ class UserService {
     userDoc: User | null;
     userDoc$: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
 
-    constructor(id: string) {
+    constructor() {
+
+    }
+
+    // constructor(id: string) {
+    //     this.id = id;
+    //     this.userRef = firebase
+    //         .firestore()
+    //         .collection('Users')
+    //         .doc(this.id);
+    // }
+
+
+    init(id: string) {
         this.id = id;
         this.userRef = firebase
             .firestore()
             .collection('Users')
             .doc(this.id);
-    }
 
-
-    init() {
         return new Promise((resolve, reject) => {
             this.userRef
                 .get()

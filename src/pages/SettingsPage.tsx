@@ -3,7 +3,9 @@ import { IonList, IonItem, IonListHeader, IonLabel, IonContent, IonHeader, IonPa
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab3.css';
 import { Redirect, Route, Link } from 'react-router-dom';
+import { loginService, LoginService } from '../services/LoginService';
 
+const ls: LoginService = loginService;
 
 const SettingsPage: React.FC = () => {
   return (
@@ -86,7 +88,7 @@ const SettingsPage: React.FC = () => {
 
 
         </IonList>
-        <IonButton color="primary" expand="block">Log out</IonButton>
+        <IonButton color="primary" expand="block" onClick={ls.logout}>Log out</IonButton>
         <IonButton color="danger" expand="block">Delete Account</IonButton>
 
       </IonContent>

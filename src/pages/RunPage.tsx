@@ -2,6 +2,7 @@ import { IonButton, IonContent, IonFooter, IonPage } from '@ionic/react';
 import React from 'react';
 import { DrawingLibrary } from '../classes/lib/Drawing';
 import RuntimeEnvironment from '../services/RuntimeEnvironment';
+import './RunPage.css';
 
 class RunPage extends React.Component {
     canvasRef: React.RefObject<HTMLCanvasElement>;

@@ -12,6 +12,7 @@ import { User, Gender } from "../interfaces/User";
 import FindService from '../services/FindService';
 import { Subscription } from 'rxjs';
 import { filter } from '../../public/phonescheme';
+import { updateUserService } from '../services/UpdateUserService';
 
 const config = {
   onSwipedLeft: () => console.log("Swiped Left"),
@@ -46,8 +47,12 @@ class SwipePage extends React.Component {
     console.log(this.state.users);
   }
 
-  like(id: string) {
-
+  async like(id: string) {
+    // let users = this.state.users;
+    // users.splice(users.indexOf(id), 1);
+    // await updateUserService.updateById(i, {
+    //   likedUsers: users
+    // });
   }
 
   nope(id: string) {
@@ -73,25 +78,13 @@ class SwipePage extends React.Component {
 
     return (
       <IonPage>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            paddingTop: "25px"
-          }}>
-          <a>
-            <img src="https://fontmeme.com/permalink/200711/d65f91e0d1c92fb0563431c4a2719577.png" className="img4" alt="fancy-fonts" />
-          </a>
 
-
-          <img src="/assets/images/logo.png" className="img3" />
-        </div>
         <IonContent>
 
           {/* Code for Share Button */}
 
-          {/* <IonFab vertical="center" horizontal="center" slot="fixed">
+          {/* 
+          <IonFab vertical="center" horizontal="center" slot="fixed">
           <IonFabButton>
             <IonIcon icon={share} />
           </IonFabButton>
@@ -115,7 +108,7 @@ class SwipePage extends React.Component {
               <IonIcon icon={logoTwitter}></IonIcon>
             </IonFabButton>
           </IonFabList>
-        </IonFab>*/}
+        </IonFab> */}
 
 
 

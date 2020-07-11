@@ -7,6 +7,7 @@ import * as firebase from 'firebase';
 import UserService from '../services/UserService';
 import { User } from '../interfaces/User';
 import { Subscription } from 'rxjs';
+import { updateUserService } from '../services/UpdateUserService';
 
 interface EditProfilePageState {
     user: User
@@ -25,18 +26,22 @@ class EditProfilePage extends React.Component<any, EditProfilePageState> {
     }
 
     componentDidMount() {
+
         const myUserService: UserService = window['myUserService'];
         console.log(myUserService);
         this.subscription = myUserService.userDoc$.subscribe((user: User) => {
-            
+            user ? console.log("user exists") : console.log("user does not exist");
             if (user) {
                 this.setState({ user : user });
             } else {
                 this.setState({
                     user: null, 
                 });
+                this.forceUpdate(); // idk if this is important but eff it
             }
         });
+
+        
     }
 
     componentWillUnmount() {
@@ -48,18 +53,25 @@ class EditProfilePage extends React.Component<any, EditProfilePageState> {
         const name = target.name;
         const value = target.value;
 
-        console.log(value);
-        //this.state.user.name = name;
+        const user = this.state.user;
 
+        user[name] = value;
+
+        this.setState({
+            user: user,
+        });
     }
 
-    handleSave(event: any) {
+    handleSave = async () => {
         // write to firebase
+        // THERE IS A BUG HERE RIGHT NOW
+        updateUserService.updateById(this.state.user._id, this.state.user);
+        console.log("updated");
     }
 
 
     render() {
-
+        console.log("pp")
         console.log(this.state.user);
         return (
             <>
@@ -91,23 +103,18 @@ class EditProfilePage extends React.Component<any, EditProfilePageState> {
                                 <IonLabel slot="end">this.Gender</IonLabel>
     
                             </IonItem> */}
-                            {this.state.user?
+                            {this.state.user ?
                                 <form>
                                     <IonItem>
                                         <IonLabel>Name</IonLabel>
-                                        <IonInput value={this.state.user.name} type="text" name="displayName" onChange={this.handleChange}></IonInput>
+                                        <IonInput value={this.state.user.name} type="text" name="name" onIonChange={this.handleChange}></IonInput>
                                     </IonItem>
                                     <IonItem>
                                         <IonLabel>Description</IonLabel>
-                                        <IonLabel slot="end"> {this.state.user.description} </IonLabel>
-                                        <IonTextarea name="description" onChange={this.handleChange}></IonTextarea>
+                                        <IonTextarea name="description" onIonChange={this.handleChange}></IonTextarea>
                                     </IonItem>
-                                    <IonItem>
-                                        <IonLabel>Description</IonLabel>
-                                        <IonLabel slot="end"> {this.state.user.description} </IonLabel>
-                                        <IonTextarea name="description" onChange={this.handleChange}></IonTextarea>
-                                    </IonItem>
-                                    <IonButton type="submit" onClick={this.handleSave}>Save</IonButton>
+                                    {/* ADD ALL OTHER FORMS STUFF HERE */}
+                                    <IonButton onClick={this.handleSave}>Save</IonButton>
                                 </form>
                             :
                                 <div><h1>pls log in :D</h1></div>

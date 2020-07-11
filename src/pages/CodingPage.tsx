@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonList, IonItem, IonLabel, IonContent, IonHeader, IonPage, IonTitle, IonButton, IonToolbar } from '@ionic/react';
+import { IonList, IonItem, IonLabel, IonContent, IonHeader, IonPage, IonTitle, IonButton, IonToolbar, IonCol, IonGrid, IonRow } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import CodeEditor from '../components/CodeEditor';
 
@@ -24,8 +24,16 @@ const CodingPage: React.FC = () => {
                 </IonHeader>
                 <CodeEditor codeScope="test"></CodeEditor>
 
-                <IonButton color="success" expand="block" routerLink="/run">Run</IonButton>
-                <IonButton color="primary" expand="block">Send</IonButton>
+                <IonGrid>
+                    <IonRow>
+                        <IonCol>
+                            <IonButton color="success" expand="block" routerLink="/run">Run</IonButton>
+                        </IonCol>
+                        <IonCol>
+                            <IonButton color="primary" expand="block">Send</IonButton>
+                        </IonCol>
+                    </IonRow>
+                </IonGrid>
 
             </IonContent>
         </IonPage>
