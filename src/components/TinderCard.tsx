@@ -147,7 +147,8 @@ const TinderCard: React.FC<any> = ({ flickOnSwipe = true, children, onSwipe, onC
 
   const handleClick = (element, offset) => {
     const bodySize = getElementSize(element);
-    if(-offset.x < bodySize.x/2) {
+    console.log(bodySize, offset)
+    if(-offset.x < window.innerWidth/2) {
       // left side
       if (onLeftSideClick) onLeftSideClick()
     } else {
