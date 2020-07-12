@@ -125,7 +125,7 @@ export const userService: UserService = window['userService'];
 
 
 // component mount
-const us = new UserService('penis');
+const us = new UserService('');
 const sub$ = us.userDoc$.subscribe(data => {
     // data is of type User
 });
