@@ -19,6 +19,7 @@ export class LoginService {
         try {
             result = await firebase.auth().signInWithPopup(provider);
         } catch (error) {
+            alert("error signing in... please try using chrome or firefox and enable cookies")
             console.error(error);
         }
         // This gives you a GitHub Access Token. You can use it to access the GitHub API.

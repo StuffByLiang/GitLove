@@ -19,6 +19,8 @@ firebase.initializeApp({
     appId: '1:770074228861:web:4392d3f41eeb41756ed914'
 });
 
+window["firebase"] = firebase;
+
 getUserService.init();
 
 window['code'] = `(heart)

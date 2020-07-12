@@ -45,7 +45,9 @@ const HomePage: React.FC = () => {
                             display: "flex",
                             justifyContent: "center",
                             alignItems: "center",
-                            paddingTop: "25px"
+                            paddingTop: "25px",
+                            maxWidth: "400px",
+                            margin: "0 auto"
                         }}>
                         <img src="/assets/images/logo.png" className="img" />
                     </div>

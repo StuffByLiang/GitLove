@@ -22,7 +22,7 @@ import Notifications from './pages/Notifications';
 import EditPreferencesPage from './pages/EditPreferencesPage';
 import EditProfilePage from './pages/EditProfilePage';
 import HomePage from './pages/HomePage';
-
+import PreviewPage from './pages/previewPage';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -83,6 +83,7 @@ const App: React.FC = () => {
               <PrivateRoute path="/edit-preferences" component={EditPreferencesPage} />
               <PrivateRoute path="/edit-profile" component={EditProfilePage} />
               <PrivateRoute path="/privacy-policy" component={PrivacyPolicyPage} />
+              <PrivateRoute path="/preview" component={PreviewPage} />
             </IonRouterOutlet>
 
             <IonTabBar slot="bottom">

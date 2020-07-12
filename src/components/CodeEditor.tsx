@@ -21,7 +21,7 @@ const CodeEditor = () => {
             padding={10}
             style={{
                 fontFamily: '"SF Mono", "Consolas", monospace',
-                fontSize: 16,
+                fontSize: 12,
             }}
         />
     );

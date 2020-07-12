@@ -15,6 +15,7 @@ export interface User {
     blockedUsers: Array<string>;
     likedUsers: Array<string>;
     nopedUsers: Array<string>;
+    autoMatch?: boolean;
 }
 
 export enum Gender {

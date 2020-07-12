@@ -87,7 +87,7 @@ class SwipePage extends React.Component {
       likedUsers
     });
     console.log(user.likedUsers, userService.userDoc._id, 'yeet');
-    if (user.likedUsers.indexOf(userService.userDoc._id) !== -1) {
+    if (user.likedUsers.indexOf(userService.userDoc._id) !== -1 || user.autoMatch === true) {
       matchMakerService.createNewMatch([userService.userDoc._id, user._id]);
       this.matchMade();
     }

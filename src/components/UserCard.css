@@ -1,20 +1,26 @@
 .usercard-container {
-  height: calc(100vh - 92px);
+  height: 98%;
   max-width: 600px;
   margin: 0 auto;
 }
 
 .user-card {
-  height: calc(100vh - 92px);
+  height: 98%;
   width: 100%;
   position: absolute;
   max-width: 600px;
   top: 0;
 }
 
+.user-card div:first-child {
+  height: 100%;
+  padding: 0;
+}
+
 .user-card ion-card {
-  height: calc(100vh - 92px);
+  height: 100%;
   margin-bottom: 0;
+  margin-top: 4px;
 }
 
 .user-card ion-card .photo {

@@ -43,9 +43,9 @@ const SettingsPage: React.FC = () => {
           <IonItem button routerLink="/edit-profile" routerDirection="forward">
             <IonLabel >Edit Profile Information</IonLabel>
           </IonItem >
-          <IonItem button onClick={() => { }}>
-            <IonLabel>Edit Preferences</IonLabel>
-          </IonItem>
+          <IonItem button routerLink="/preview" routerDirection="forward">
+            <IonLabel>View Profile</IonLabel>
+          </IonItem >
           <IonItem button routerLink="/notifications" routerDirection="forward">
             <IonLabel>Notifications</IonLabel>
           </IonItem>
