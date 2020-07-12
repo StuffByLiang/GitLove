@@ -13,9 +13,9 @@ This app was created using Ionic React, so to run it you can execute `ionic serv
  - [Aiden Kerr](https://github.com/AidenKerr)
 
 ## API Docs
- - [Animation](https://github.com/TheD3vel0per/gitLOVE/docs/animation.md)
- - [Drawing](https://github.com/TheD3vel0per/gitLOVE/docs/drawing.md)
- - [Sound](https://github.com/TheD3vel0per/gitLOVE/docs/sound.md)
+ - [Animation](https://github.com/TheD3vel0per/GitLove/blob/master/docs/animation.md)
+ - [Drawing](https://github.com/TheD3vel0per/GitLove/blob/master/docs/drawing.md)
+ - [Sound](https://github.com/TheD3vel0per/GitLove/blob/master/docs/sound.md)
 
 ## License
 ```
