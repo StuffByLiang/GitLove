@@ -49,7 +49,7 @@ class MatchesPage extends React.Component {
             <IonListHeader>
               Recent Conversations
           </IonListHeader>
-          {this.state.matches.map(match => <UserMessage matchh={match}/>)}
+          {this.state.matches.map(match => <UserMessage key={match._id} matchh={match}/>)}
             {/* <UserMessage /> */}
 
           </IonList>

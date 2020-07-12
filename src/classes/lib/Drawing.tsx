@@ -71,7 +71,7 @@ export class DrawingLibrary extends Library {
         // Draw "I love you" in a given language
         // (love <x> <y> <language>)
         this.addBinding(new Binding(
-            'sendLove',
+            'send-love',
             this.drawLove.bind(this),
             3,
             3
@@ -88,6 +88,7 @@ export class DrawingLibrary extends Library {
         ));
 
         // Draw text on canvas
+        // (text <text> <x> <y> <size>)
         this.addBinding(new Binding(
             'text',
             this.drawText.bind(this),
@@ -154,7 +155,10 @@ export class DrawingLibrary extends Library {
         return PhoneScheme.undef;
     }
 
-
+    /**
+     * Draw Smiley
+     * @param args
+     */
     drawSmiley() {
         this.context.beginPath();
         this.context.arc(75, 75, 50, 0, Math.PI * 2, true); // Outer circle
@@ -175,7 +179,6 @@ export class DrawingLibrary extends Library {
         this.context.font = '48px serif';
         this.context.fillText(str, x, y);
         return PhoneScheme.undef;
-
     }
 
 
@@ -185,141 +188,46 @@ export class DrawingLibrary extends Library {
      */
     drawLove([lang, x, y]) {
 
+        this.context.font = "30px Verdana";
+        var gradient = this.context.createLinearGradient(0, 0, 90, 0);
+        gradient.addColorStop(0, "magenta");
+        gradient.addColorStop(0.5, "blue");
+        gradient.addColorStop(1.0, "red");
+        // Fill with gradient
+        this.context.fillStyle = gradient;
+
         switch (lang) {
-
             case 'english':
-
-                this.context.font = "30px Verdana";
-                var gradient = this.context.createLinearGradient(0, 0, 90, 0);
-                gradient.addColorStop(0, " magenta");
-                gradient.addColorStop(0.5, "blue");
-                gradient.addColorStop(1.0, "red");
-                // Fill with gradient
-                this.context.fillStyle = gradient;
                 this.context.fillText("I Love You", x, y);
                 break;
-
             case 'hindi':
-
-                this.context.font = "30px Verdana";
-                var gradient = this.context.createLinearGradient(0, 0, 90, 0);
-                gradient.addColorStop(0, " magenta");
-                gradient.addColorStop(0.5, "blue");
-                gradient.addColorStop(1.0, "red");
-                // Fill with gradient
-                this.context.fillStyle = gradient;
                 this.context.fillText("मैं तुमसे प्यार करता हूँ", x, y);
                 break;
-
-
             case 'french':
-
-                this.context.font = "30px Verdana";
-                var gradient = this.context.createLinearGradient(0, 0, 90, 0);
-                gradient.addColorStop(0, " magenta");
-                gradient.addColorStop(0.5, "blue");
-                gradient.addColorStop(1.0, "red");
-                // Fill with gradient
-                this.context.fillStyle = gradient;
                 this.context.fillText("je t'aime", x, y);
                 break;
-
             case 'spanish':
-
-                this.context.font = "30px Verdana";
-                var gradient = this.context.createLinearGradient(0, 0, 90, 0);
-                gradient.addColorStop(0, " magenta");
-                gradient.addColorStop(0.5, "blue");
-                gradient.addColorStop(1.0, "red");
-                // Fill with gradient
-                this.context.fillStyle = gradient;
                 this.context.fillText("te quiero", x, y);
                 break;
-
-
             case 'arabic':
-
-                this.context.font = "30px Verdana";
-                var gradient = this.context.createLinearGradient(0, 0, 90, 0);
-                gradient.addColorStop(0, " magenta");
-                gradient.addColorStop(0.5, "blue");
-                gradient.addColorStop(1.0, "red");
-                // Fill with gradient
-                this.context.fillStyle = gradient;
                 this.context.fillText("أحبك", x, y);
                 break;
-
             case 'tamil':
-
-                this.context.font = "10px Verdana";
-                var gradient = this.context.createLinearGradient(0, 0, 90, 0);
-                gradient.addColorStop(0, " magenta");
-                gradient.addColorStop(0.5, "blue");
-                gradient.addColorStop(1.0, "red");
-                // Fill with gradient
-                this.context.fillStyle = gradient;
                 this.context.fillText("நான் உன்னை நேசிக்கிறேன்", x, y);
                 break;
-
-
             case 'japanese':
-
-                this.context.font = "10px Verdana";
-                var gradient = this.context.createLinearGradient(0, 0, 90, 0);
-                gradient.addColorStop(0, " magenta");
-                gradient.addColorStop(0.5, "blue");
-                gradient.addColorStop(1.0, "red");
-                // Fill with gradient
-                this.context.fillStyle = gradient;
                 this.context.fillText("わたしは、あなたを愛しています", x, y);
                 break;
-
-
             case 'chinese':
-
-                this.context.font = "30px Verdana";
-                var gradient = this.context.createLinearGradient(0, 0, 90, 0);
-                gradient.addColorStop(0, " magenta");
-                gradient.addColorStop(0.5, "blue");
-                gradient.addColorStop(1.0, "red");
-                // Fill with gradient
-                this.context.fillStyle = gradient;
                 this.context.fillText("我爱你", x, y);
                 break;
-
             case 'korean':
-
-                this.context.font = "30px Verdana";
-                var gradient = this.context.createLinearGradient(0, 0, 90, 0);
-                gradient.addColorStop(0, " magenta");
-                gradient.addColorStop(0.5, "blue");
-                gradient.addColorStop(1.0, "red");
-                // Fill with gradient
-                this.context.fillStyle = gradient;
                 this.context.fillText("사랑해", x, y);
                 break;
-
             case 'gujarati':
-
-                this.context.font = "30px Verdana";
-                var gradient = this.context.createLinearGradient(0, 0, 90, 0);
-                gradient.addColorStop(0, " magenta");
-                gradient.addColorStop(0.5, "blue");
-                gradient.addColorStop(1.0, "red");
-                // Fill with gradient
-                this.context.fillStyle = gradient;
                 this.context.fillText("હું તને પ્રેમ કરું છુ", x, y);
                 break;
-
             case 'punjabi':
-
-                this.context.font = "30px Verdana";
-                var gradient = this.context.createLinearGradient(0, 0, 90, 0);
-                gradient.addColorStop(0, " magenta");
-                gradient.addColorStop(0.5, "blue");
-                gradient.addColorStop(1.0, "red");
-                // Fill with gradient
-                this.context.fillStyle = gradient;
                 this.context.fillText("ਮੈਂ ਤੁਹਾਨੂੰ ਪਿਆਰ ਕਰਦਾ ਹਾਂ", x, y);
                 break;
         }
@@ -338,6 +246,8 @@ export class DrawingLibrary extends Library {
         }
         this.context.fillText(text, x, y);
     }
+
+
 
 }
 

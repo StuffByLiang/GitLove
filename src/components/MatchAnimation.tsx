@@ -2,25 +2,22 @@ import "./MatchAnimation.css";
 import React, { useState } from 'react';
 import { IonAlert, IonButton, IonContent } from '@ionic/react';
 
-const [showAlert1, setShowAlert1] = useState(true);
+class MatchAnimation extends React.Component {
 
-class MatchAnimation extends React.Component{
-
-render() {
-    return(
-        <>
-          <IonAlert
-          isOpen={showAlert1}
-          onDidDismiss={() => setShowAlert1(false)}
+  render() {
+    return (
+      <>
+        <IonAlert
+          isOpen={true}
           cssClass='my-custom-class'
-          header={'Congratulations! You Have Matched with'}
-          message= "hi"
+          header={'Congratulations! You Have Matched!'}
+          message='<img src=/assets/images/heart.png alt="Logo" />'
           buttons={['OK']}
         />
-        
-        </>
+
+      </>
     );
-}
+  }
 
 }
 

@@ -13,7 +13,7 @@ const SettingsPage: React.FC = () => {
   const resetMatches = () => {
     updateUserService.updateById(userService.userDoc._id, {
       likedUsers: [],
-      nopedUsers: []
+      nopedUsers: [],
     });
   }
 

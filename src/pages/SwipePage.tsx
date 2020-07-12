@@ -86,9 +86,12 @@ class SwipePage extends React.Component {
     });
     console.log(user.likedUsers, userService.userDoc._id, 'yeet');
     if (user.likedUsers.indexOf(userService.userDoc._id) !== -1) {
-      this.matchMade();
       matchMakerService.createNewMatch([userService.userDoc._id, user._id]);
+      this.matchMade();
     }
+    
+    
+
   }
 
   nope(user: User) {

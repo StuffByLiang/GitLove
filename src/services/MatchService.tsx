@@ -35,6 +35,17 @@ export class MatchService {
         });
     }
 
+    async deleteAll() {
+        for (let index = 0; index < this.matches.length; index++) {
+            const match: Match = this.matches[index];
+            await firebase
+                .firestore()
+                .collection('Matches') 
+                .doc(match._id)
+                .delete();
+        }
+    }
+
 }
 
 window['matchService'] = new MatchService();

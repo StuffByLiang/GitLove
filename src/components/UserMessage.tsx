@@ -73,23 +73,22 @@ class UserMessage extends React.Component<UserMessageProps, UserMessageState> {
     }
     
     handleClick() {
-        const message: Message = this.props.matchh.message;
-        console.log(message)
-        if(message.read) {
+        const match: Match = this.props.matchh;
+        if(match.message.read) {
             // last message is read, so anyone can send a new message
-            window["code"] = this.state.match;
+            window["code"] = '(alert "Hello World!")';
+            window["match"] = this.state.match;
             this.props.history.push("/coding")
         } else {
-            if(message.authorUid == firebase.auth().currentUser.uid) {
+            if(match.message.authorUid == firebase.auth().currentUser.uid) {
                 // last message is unread and sent by current user, do nothing
                 
             } else {
                 // last message is unread and sent by other user, view the message and update that it is read
-                let message = this.state.match.message;
+                matchMakerService.markRead(this.props.matchh);
 
-                matchMakerService.markRead(this.state.match);
-
-                window["code"] = this.state.match.message.code;
+                window["code"] = this.props.matchh.message.code;
+                window["match"] = this.props.matchh;
                 this.props.history.push("/run");
             }
         }

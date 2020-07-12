@@ -3,7 +3,7 @@ import { Match } from '../interfaces/Match';
 
 export class MatchMakerService {
     async createNewMatch(matchees: Array<string>) {
-        const newId = firebase.firestore().collection('_').doc().id;
+        const newId = matchees.sort().join();
         await firebase
             .firestore()
             .collection('Matches')
@@ -35,14 +35,14 @@ export class MatchMakerService {
     }
 
     async sendMessage(match: Match, code: string) {
-        let message = match.message;
-
-        message.code = code;
-        message.read = false;
-        message.authorUid = firebase.auth().currentUser.uid;
+        let message = { 
+            code: code, 
+            read: false, 
+            authorUid: firebase.auth().currentUser.uid
+        };
 
         matchMakerService.updateById(match._id, {
-            message
+            message: message
         });
     }
 }

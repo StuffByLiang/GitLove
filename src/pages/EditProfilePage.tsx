@@ -25,6 +25,7 @@ class EditProfilePage extends React.Component<any, EditProfilePageState> {
             user: null
         }
         this.handleChange = this.handleChange.bind(this);
+        this.handleSave = this.handleSave.bind(this);
     }
 
     componentDidMount() {
@@ -57,9 +58,15 @@ class EditProfilePage extends React.Component<any, EditProfilePageState> {
         switch(name) {
             case "dateOfBirth":
                 // date of birth needs to be a timestamp, not Date
+                console.log("yoyoy",target.value);
                 const newDob = new Date(target.value);
-                value = firebase.firestore.Timestamp.fromDate(newDob);
-                user[name] = value;
+                console.log(newDob);
+                // @ts-ignore
+                if ((newDob.getTime() > 1000 * 60 * 60 * 24 * 365 * 18) && (newDob != 'Invalid Date')) {
+                    value = firebase.firestore.Timestamp.fromDate(newDob);
+                    user[name] = value;
+                }
+
                 break;
             case "languages":
                 // split string into array 
@@ -91,11 +98,14 @@ class EditProfilePage extends React.Component<any, EditProfilePageState> {
     handleSave = async () => {
         // write to firebase
         updateUserService.updateById(this.state.user._id, this.state.user);
+        console.log(this.state.user.dateOfBirth)
+        this.props.history.goBack();
     }
 
 
     render() {
         const user = this.state.user;
+        let dob;
         let dobString = "error"; // this shouldn't display ever
         let featuresList = [];
         let languages = "";
@@ -104,12 +114,9 @@ class EditProfilePage extends React.Component<any, EditProfilePageState> {
         // this only happens when user exists
         if (user) {
             
-            // get date of birth and format as string
-            let dob = user.dateOfBirth.toDate();
-            let year = dob.getFullYear().toString();
-            let month = (dob.getMonth() + 1).toString();
-            let day = dob.getDay().toString();
-            dobString = year + "-" + month + "-" + day;
+            // // get date of birth and format as ISO string
+            dob = user.dateOfBirth.toDate();
+            dobString = dob.toISOString();
 
             // list all available features
             featuresList = user.features.map((feat: any) => {
@@ -155,7 +162,7 @@ class EditProfilePage extends React.Component<any, EditProfilePageState> {
                                     </IonItem>
                                     <IonItem>
                                         <IonLabel>Date of Birth: </IonLabel>
-                                        <IonDatetime name="dateOfBirth" displayFormat="YYYY-MM-DD" value={dobString} onIonChange={this.handleChange}/>
+                                        <IonDatetime name="dateOfBirth" value={dobString} onIonChange={this.handleChange}/>
                                     </IonItem>
                                     <IonItem>
                                         <IonLabel>Description: </IonLabel>
