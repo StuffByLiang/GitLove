@@ -23,8 +23,38 @@ window["firebase"] = firebase;
 
 getUserService.init();
 
-window['code'] = `(heart)
-(send-love "english" 10 160)`;
+window['code'] = `(define (frontslash x y)
+(line x (+ y 15) (+ x 10) y 1))
+
+
+(define (backslash x y)
+(line x y (+ x 10) (+ y 15) 1))
+
+
+(define (updateX x y)
+(cond   [(= x 0) (+ x 10)]
+    [(= (mod x 300) 0) 0]
+    [else (+ x 10)]))
+
+(define (updateY x y)
+(cond   [(= x 0) y]
+    [(= (mod x 300) 0) (+ y 15)]
+    [else y]))
+
+(define (randomslash x y)
+(if (> (random-integer 100) 50)
+    (frontslash x y)
+    (backslash x y)))
+
+(define (maze x y n)
+(cond [(zero? n) (randomslash x y)]
+    [else (randomslash x y)
+          (maze
+    (updateX x y)
+    (updateY x y)
+    (- n 1))]))
+
+(maze 0 0 618)`;
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
