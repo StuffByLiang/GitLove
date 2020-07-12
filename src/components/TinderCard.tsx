@@ -117,7 +117,7 @@ const mouseCoordinatesFromEvent = (e) => {
 
 let swipeAlreadyReleased = false
 
-const TinderCard = ({ flickOnSwipe = true, children, onSwipe, onCardLeftScreen, onLeftSideClick, onRightSideClick, className, preventSwipe = [] }) => {
+const TinderCard: React.FC<any> = ({ flickOnSwipe = true, children, onSwipe, onCardLeftScreen, onLeftSideClick, onRightSideClick, className, preventSwipe = [] }) => {
   const handleSwipeReleased = async (element, speed, offset) => {
     if (swipeAlreadyReleased) { return }
     swipeAlreadyReleased = true
@@ -224,4 +224,4 @@ const TinderCard = ({ flickOnSwipe = true, children, onSwipe, onCardLeftScreen, 
   )
 }
 
-module.exports = TinderCard
+export default TinderCard;

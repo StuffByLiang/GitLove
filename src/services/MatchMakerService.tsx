@@ -1,4 +1,5 @@
 import * as firebase from 'firebase';
+import { Match } from '../interfaces/Match';
 
 export class MatchMakerService {
     async createNewMatch(matchees: Array<string>) {
@@ -12,10 +13,16 @@ export class MatchMakerService {
                 matchedUsers: matchees,
                 message: {
                     authorUid: matchees[0],
-                    code: '(alert "Send them a message!")'
+                    code: '(alert "Send them a message!")',
+                    read: true
                 },
                 lastMatchActivity: firebase.database.ServerValue.TIMESTAMP, // i think this is good
             });
+    }
+
+    async updateById(id: string, data: Partial<Match>) {
+        const match = firebase.firestore().collection('Matches').doc(id);
+        await match.update(data);
     }
 }
 

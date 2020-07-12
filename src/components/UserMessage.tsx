@@ -5,7 +5,7 @@ import { filter, mergeAll, take } from 'rxjs/operators';
 import { Gender, User } from '../interfaces/User';
 import { getUserService } from '../services/GetUserService';
 import ChatPage from '../components/ChatMessage'
-import { Match } from '../interfaces/Match';
+import { Match, Message } from '../interfaces/Match';
 import { withRouter } from "react-router-dom";
 
 
@@ -72,8 +72,21 @@ class UserMessage extends React.Component<UserMessageProps, UserMessageState> {
     }
     
     handleClick() {
-        window["code"] = this.props.matchh.message.code;
-        console.log(this.props.history.push("/run"));
+        const message: Message = this.props.matchh.message;
+        console.log(message)
+        if(message.read) {
+            // last message is read, so anyone can send a new message
+            this.props.history.push("/coding")
+        } else {
+            if(message.authorUid == firebase.auth().currentUser.uid) {
+                // last message is unread and sent by current user, do nothing
+                
+            } else {
+                // last message is unread and sent by other user, view the message
+                window["code"] = this.props.matchh.message.code;
+                this.props.history.push("/run");
+            }
+        }
     }
 
     render() {
