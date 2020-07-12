@@ -7,12 +7,10 @@ import './RunPage.css';
 
 class RunPage extends React.Component {
     canvasRef: React.RefObject<HTMLCanvasElement>;
-    animateRef: React.RefObject<HTMLDivElement>;
 
     constructor(props) {
         super(props)
         this.canvasRef = React.createRef();
-        this.animateRef = React.createRef();
     }
 
     componentDidMount() {
@@ -38,12 +36,6 @@ class RunPage extends React.Component {
                 </IonHeader>
                 <IonContent>
                     <IonGrid>
-                        <IonRow>
-                            <IonCol>
-                                <div ref={this.animateRef}>
-                                </div>
-                            </IonCol>
-                        </IonRow>
                         <IonRow>
                             <IonCol>
                                 <canvas

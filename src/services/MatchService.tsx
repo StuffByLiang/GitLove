@@ -36,14 +36,22 @@ export class MatchService {
     }
 
     async deleteAll() {
+        console.log(this.matches);
         for (let index = 0; index < this.matches.length; index++) {
             const match: Match = this.matches[index];
-            await firebase
-                .firestore()
-                .collection('Matches') 
-                .doc(match._id)
-                .delete();
+            console.log(match);
+            this.deleteOne(match);
         }
+    }
+
+    async deleteOne(match: Match) {
+        await firebase
+            .firestore()
+            .collection('Matches')
+            .doc(match._id)
+            .delete();
+        console.log(`${match._id} deleted`);
+
     }
 
 }

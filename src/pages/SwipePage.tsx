@@ -75,10 +75,12 @@ class SwipePage extends React.Component {
   flag = 0;
 
   matchMade() {
-    this.state.flag = 1;
+    this.setState({ flag: 1 });
   }
 
   like(user: User) {
+    this.setState({ flag: 0 });
+
     let likedUsers = userService.userDoc.likedUsers;
     likedUsers.push(user._id);
     updateUserService.updateById(userService.id, {
@@ -89,12 +91,14 @@ class SwipePage extends React.Component {
       matchMakerService.createNewMatch([userService.userDoc._id, user._id]);
       this.matchMade();
     }
-    
-    
+
+
 
   }
 
   nope(user: User) {
+    this.setState({ flag: 0 });
+
     let nopedUsers = userService.userDoc.nopedUsers;
     nopedUsers.push(user._id);
     updateUserService.updateById(userService.id, {
@@ -153,7 +157,14 @@ class SwipePage extends React.Component {
           </IonFabList>
         </IonFab> */}
 
-
+          <p style={{
+            position: 'relative',
+            top: '50%',
+            left: 'calc(50% - 150px)',
+            justifyContent: 'center',
+          }}>
+            You have no more <br/>potential matches remaining.
+          </p>
 
           {this.state.flag === 1 ? <MatchAnimation /> : null}
 

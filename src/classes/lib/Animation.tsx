@@ -13,15 +13,6 @@ export class AnimationLibrary extends Library {
 
     init(): AnimationLibrary {
 
-        // beat
-        // (beat <size> <times>)
-        this.addBinding(new Binding(
-            'beat',
-            this.setBeat.bind(this),
-            2,
-            2
-        ));
-
         //clock
         //(clock)
         this.addBinding(new Binding(
@@ -36,9 +27,7 @@ export class AnimationLibrary extends Library {
 
     }
 
-    setBeat() {
-        this.context.clearRect(0, 0, )
-    }
+
 
     clock() {
         var now = new Date();
@@ -132,6 +121,8 @@ export class AnimationLibrary extends Library {
         this.context.stroke();
       
         this.context.restore();
+        window.requestAnimationFrame(this.clock.bind(this));
+        return PhoneScheme.undef;
     }
 
 }

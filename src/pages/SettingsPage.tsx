@@ -6,6 +6,7 @@ import { Redirect, Route, Link } from 'react-router-dom';
 import { loginService, LoginService } from '../services/LoginService';
 import { updateUserService } from '../services/UpdateUserService';
 import { userService } from '../services/UserService';
+import { matchService } from '../services/MatchService';
 
 const ls: LoginService = loginService;
 
@@ -15,6 +16,8 @@ const SettingsPage: React.FC = () => {
       likedUsers: [],
       nopedUsers: [],
     });
+
+    matchService.deleteAll();
   }
 
   return (
