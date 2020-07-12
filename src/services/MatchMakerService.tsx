@@ -12,7 +12,7 @@ export class MatchMakerService {
                 _id: newId,
                 matchedUsers: matchees,
                 message: {
-                    authorUid: matchees[0],
+                    authorUid: "default",
                     code: '(alert "Send them a message!")',
                     read: true
                 },

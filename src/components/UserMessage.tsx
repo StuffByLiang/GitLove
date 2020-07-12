@@ -97,14 +97,25 @@ class UserMessage extends React.Component<UserMessageProps, UserMessageState> {
     render() {
         const message: Message = this.props.matchh.message;
         let msg = "";
-        if(message.read) {
+        if(message.authorUid === "default") {
+            // default no messages sent
             msg = "Click to send a new lambda"
+        } else if(message.read && message.authorUid !== "default") {
+            // message is read
+            if(message.authorUid == firebase.auth().currentUser.uid) {
+                // last message is read and sent by current user, do nothing
+                msg = "Opened. Click to send a new lambda"
+            } else {
+                // last message is read and sent by other user, view the message
+                msg = "Received. Click to send a new lambda"
+            }
         } else {
+            // message is not read
             if(message.authorUid == firebase.auth().currentUser.uid) {
                 // last message is unread and sent by current user, do nothing
-                msg = "Sent"
+                msg = "Delivered"
             } else {
-                // last message is unread and sent by other user, view the message
+                // last message is unread and sent by other user, view the message and update that it is read
                 msg = "Click to view the lambda"
             }
         }

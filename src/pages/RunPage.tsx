@@ -46,7 +46,8 @@ class RunPage extends React.Component {
                                     height={300}
                                     ref={this.canvasRef}
                                     style={{
-                                        outline: '1px solid rgb(128, 128, 128)'
+                                        outline: '1px solid rgb(128, 128, 128)',
+                                        backgroundColor: 'white',
                                     }}>
                                 </canvas>
                             </IonCol>

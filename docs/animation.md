@@ -6,5 +6,5 @@ __Render animated clock__
 
 ---
 
-## `(heart)`  
+## `(animate-heart)`  
 __Render animated heart__  

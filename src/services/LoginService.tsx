@@ -13,13 +13,13 @@ export class LoginService {
     login = async () => {
         const provider = new firebase.auth.GithubAuthProvider();
 
-        await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+        await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
 
         let result: firebase.auth.UserCredential;
         try {
             result = await firebase.auth().signInWithPopup(provider);
         } catch (error) {
-            console.error("WHAT THE BLOODY FUCK", error);
+            console.error(error);
         }
         // This gives you a GitHub Access Token. You can use it to access the GitHub API.
         let credential: firebase.auth.OAuthCredential = result.credential;
@@ -33,6 +33,8 @@ export class LoginService {
         usersRef.get()
             .then((docSnapshot) => {
                 if (docSnapshot.exists) {
+                    userService.init(user.uid);
+                    matchService.init(user.uid);
                     usersRef.onSnapshot((doc) => {
                         // stuff on login
                     });
