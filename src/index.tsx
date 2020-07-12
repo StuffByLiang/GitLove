@@ -22,7 +22,7 @@ firebase.initializeApp({
 getUserService.init();
 
 window['code'] = `(heart)
-(sendLove 10 160 "english")`;
+(sendLove "english" 10 160)`;
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

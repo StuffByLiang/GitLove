@@ -40,7 +40,6 @@ class SwipePage extends React.Component {
   }
 
   filterUsers(users: Array<User>) {
-    console.log(this.state)
     let currentUserId = userService.id;
 
     return users.filter((user: User) => {
@@ -57,7 +56,6 @@ class SwipePage extends React.Component {
             allUsers: data,
           })
         }
-        console.log(data)
       })
 
     this.userSub$ = userService.userDoc$
@@ -67,7 +65,6 @@ class SwipePage extends React.Component {
             swipedUsers: user.likedUsers.concat(user.nopedUsers)
           })
         }
-        console.log(user)
       })
 
   }
@@ -78,6 +75,7 @@ class SwipePage extends React.Component {
     updateUserService.updateById(userService.id, {
       likedUsers
     });
+    console.log(user.likedUsers, userService.userDoc._id, 'yeet');
     if (user.likedUsers.indexOf(userService.userDoc._id) !== -1){
       matchMakerService.createNewMatch([userService.userDoc._id, user._id]);
     }

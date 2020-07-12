@@ -1,5 +1,4 @@
 import * as firebase from 'firebase';
-import { User } from '../interfaces/User';
 
 export class MatchMakerService {
     async createNewMatch(matchees: Array<string>) {

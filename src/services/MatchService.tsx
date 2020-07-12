@@ -3,16 +3,16 @@ import { BehaviorSubject } from 'rxjs';
 import { Match } from '../interfaces/Match';
 
 
-class MatchService {
+export class MatchService {
 
     matches: Array<Match>
     matchRef: firebase.firestore.CollectionReference;
     matchQuery: firebase.firestore.Query;
     Matches$: BehaviorSubject<Array<Match>> = new BehaviorSubject([]);
 
-    init() {
+    init(id: string) {
         if (firebase.auth().currentUser === null) {
-            return;
+            return new Promise((resolve, reject) => reject());
         }
 
         this.matchRef = firebase
@@ -20,7 +20,7 @@ class MatchService {
             .collection('Matches');
         this.matchQuery = this
             .matchRef
-            .where('matchedUsers', 'array-contains', firebase.auth().currentUser.uid);
+            .where('matchedUsers', 'array-contains', id);
         return new Promise((resolve, reject) => {
             this.matchQuery.onSnapshot(data => {
                 const matches = [];

@@ -87,6 +87,14 @@ export class DrawingLibrary extends Library {
             3
         ));
 
+        // Draw text on canvas
+        this.addBinding(new Binding(
+            'text',
+            this.drawText.bind(this),
+            3,
+            4
+        ));
+
 
 
         return this;
@@ -175,7 +183,7 @@ export class DrawingLibrary extends Library {
      * Draw "I love you" in the given language
      * @param args 
      */
-    drawLove([x, y, lang]) {
+    drawLove([lang, x, y]) {
 
         switch (lang) {
 
@@ -316,6 +324,19 @@ export class DrawingLibrary extends Library {
                 break;
         }
 
+    }
+
+
+    /**
+     * prints given text on page
+     * @param args 
+     */
+    drawText([text, x, y, size]) {
+        this.context.font = "30px Verdana";
+        if (size) {
+            this.context.font = size.toString() + "px Verdana";
+        }
+        this.context.fillText(text, x, y);
     }
 
 }

@@ -27,6 +27,5 @@ export class AnimateLibrary extends Library {
     }
 
     animRain([emoji]) {
-        console.log(emoji);
     }
 }

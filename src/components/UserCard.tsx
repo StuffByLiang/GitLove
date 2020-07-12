@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { IonContent, IonHeader, IonPage, IonChip, IonTitle, IonToolbar, IonCard, IonGrid, IonRow, IonCol, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton } from '@ionic/react';
+import React, { useState } from 'react';
+import { IonContent, IonHeader, IonPage, IonList, IonChip, IonTitle, IonToolbar, IonCard, IonGrid, IonRow, IonCol, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton } from '@ionic/react';
 import { useSwipeable, Swipeable } from 'react-swipeable'
 import { Gesture, GestureConfig, createGesture } from '@ionic/core';
 import TinderCard from './TinderCard'
@@ -20,7 +20,7 @@ const UserCard: React.FC<UserCardProps> = ({ user, like, nope }) => {
 
     const onSwipe = (direction) => {
         console.log('You swiped: ' + direction)
-        if(direction === 'right') {
+        if (direction === 'right') {
             if (like) like(user);
         } else {
             if (nope) nope(user);
@@ -41,6 +41,41 @@ const UserCard: React.FC<UserCardProps> = ({ user, like, nope }) => {
         setScreen(1);
     }
 
+    const getGender = () => {
+        switch(user.gender){
+            case 0:
+                return "Male";
+                break;
+            case 1:
+                return "Female";
+                break;
+            case 2:
+                return "NonBinary";
+                break;
+            case 3:
+                return "Agender";
+                break;
+            case 4:
+                return "Other";
+                break;
+            default:
+                return "Other";
+
+        }
+    }
+
+    const dobstring = () => {
+
+    // get date of birth and format as string
+    let dob = user.dateOfBirth.toDate();
+    let year = dob.getFullYear().toString();
+    let month = (dob.getMonth() + 1).toString();
+    let day = dob.getDay().toString();
+    return year + "-" + month + "-" + day;
+    
+}
+
+
     return (
         <div className="user-card">
             <TinderCard
@@ -53,7 +88,7 @@ const UserCard: React.FC<UserCardProps> = ({ user, like, nope }) => {
                 <IonCard>
                     {screen == 0 ?
                         <>
-                            <div style={{backgroundImage: `url(${user.profilePicture})`}}
+                            <div style={{ backgroundImage: `url(${user.profilePicture})` }}
                                 className="photo"></div>
                             <IonCardHeader>
                                 {/* <IonCardSubtitle></IonCardSubtitle> */}
@@ -64,23 +99,44 @@ const UserCard: React.FC<UserCardProps> = ({ user, like, nope }) => {
                                 {user.description}
                             </IonCardContent>
                         </>
-                    :
+                        :
                         <>
+
                             <IonCardContent>
-                                <IonCardSubtitle>Programming Skillz</IonCardSubtitle>
-                                <div className="languages-container">
-                                    {user.languages.map((language, i) => <div className="language" key={i}>{language}</div>)}
-                                </div>
+                                <IonCardSubtitle>Info</IonCardSubtitle>
+                                <IonList>
+                                    <IonItem>
+                                        <IonLabel slot="start">Gender : </IonLabel>
+                                        <IonLabel>{getGender()}</IonLabel>
+                                    </IonItem>
+
+                                    <IonItem>
+                                        <IonLabel slot="start">Date of Birth : </IonLabel>
+                                        <IonLabel>{dobstring()}</IonLabel>
+                                    </IonItem>
+
+                                    {/* Features go here */}
+                                    {/* <IonItem>
+                                        <IonLabel slot="start">Features : </IonLabel>
+                                        <IonLabel>{getGender()}</IonLabel>
+                                    </IonItem> */}
+
+                                </IonList>
                             </IonCardContent>
-                            <IonCardContent>
-                                <IonCardSubtitle>Other Info</IonCardSubtitle>
-                            </IonCardContent>
+                            <IonGrid className="grid-full">
+                                <IonCardContent>
+                                    <IonCardSubtitle>Programming Languages</IonCardSubtitle>
+                                </IonCardContent>
+                                <IonRow>
+                                    {user.languages.map((language, i) => <IonCol size="4" key={i}>{<IonChip outline color="primary"><IonLabel>{language}</IonLabel></IonChip>}</IonCol>)}
+                                </IonRow>
+                            </IonGrid>
                         </>
                     }
                 </IonCard>
             </TinderCard>
         </div>
-        );
+    );
 };
 
 export default UserCard;

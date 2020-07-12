@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import {userService} from './UserService';
 import IonAlert from '@ionic/react';
 import { getUserService } from './GetUserService';
+import { matchService } from './MatchService';
 
 export class LoginService {
 
@@ -20,14 +21,12 @@ export class LoginService {
         } catch (error) {
             console.error("WHAT THE BLOODY FUCK", error);
         }
-        console.log(result);
         // This gives you a GitHub Access Token. You can use it to access the GitHub API.
         let credential: firebase.auth.OAuthCredential = result.credential;
         let token = credential.accessToken;
         // The signed-in user info.
         let user = result.user;
 
-        console.log(user);
 
         const usersRef = getUserService.usersRef.doc(user.uid);
 
@@ -61,6 +60,7 @@ export class LoginService {
                         nopedUsers: [],
                     });
                     userService.init(user.uid);
+                    matchService.init(user.uid);
                 }
 
             });

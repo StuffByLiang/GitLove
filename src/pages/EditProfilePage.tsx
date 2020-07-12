@@ -30,7 +30,6 @@ class EditProfilePage extends React.Component<any, EditProfilePageState> {
     componentDidMount() {
 
         this.subscription = userService.userDoc$.subscribe((user: User) => {
-            user ? console.log("user exists") : console.log("user does not exist");
             if (user) {
                 this.setState({ user: user });
             } else {
@@ -52,19 +51,28 @@ class EditProfilePage extends React.Component<any, EditProfilePageState> {
         const target = event.target;
         const name = target.name;
         const user = this.state.user;
+        
+        // change user depending on what has just changed
         let value;
         switch(name) {
             case "dateOfBirth":
+                // date of birth needs to be a timestamp, not Date
                 const newDob = new Date(target.value);
                 value = firebase.firestore.Timestamp.fromDate(newDob);
                 user[name] = value;
                 break;
-            case "name": // name & description are both strings so it's simple target.value;
+            case "languages":
+                // split string into array 
+                value = target.value.split(',');
+                user[name] = value;
+                break;
+            case "name": // these three use the same logic
             case "description":
+            case "gender":
                 value = target.value;
                 user[name] = value;
                 break;
-            default: // features
+            default: // find index of array where changes were made, update that index
                 value = target.value;
                 const index = user.features.findIndex(feat => feat.question == name);
                 const newFeat = {
@@ -74,7 +82,7 @@ class EditProfilePage extends React.Component<any, EditProfilePageState> {
                 user.features[index] = newFeat;
         }
 
-        console.log(value);
+        // apply changes (does not update firebase)
         this.setState({
             user: user,
         });
@@ -82,9 +90,7 @@ class EditProfilePage extends React.Component<any, EditProfilePageState> {
 
     handleSave = async () => {
         // write to firebase
-        
         updateUserService.updateById(this.state.user._id, this.state.user);
-        console.log("updated");
     }
 
 
@@ -92,15 +98,21 @@ class EditProfilePage extends React.Component<any, EditProfilePageState> {
         const user = this.state.user;
         let dobString = "error"; // this shouldn't display ever
         let featuresList = [];
+        let languages = "";
+
+
+        // this only happens when user exists
         if (user) {
+            
+            // get date of birth and format as string
             let dob = user.dateOfBirth.toDate();
             let year = dob.getFullYear().toString();
             let month = (dob.getMonth() + 1).toString();
             let day = dob.getDay().toString();
             dobString = year + "-" + month + "-" + day;
-            console.log(dobString);
+
+            // list all available features
             featuresList = user.features.map((feat: any) => {
-                console.log(feat.question);
                 return (
                     <IonItem key={feat.question}>
                         <IonLabel>{feat.question}</IonLabel>
@@ -108,6 +120,9 @@ class EditProfilePage extends React.Component<any, EditProfilePageState> {
                     </IonItem>
                 );
             });
+
+            // join language array together as a string
+            languages = user.languages.join();
         }
 
         return (
@@ -151,7 +166,7 @@ class EditProfilePage extends React.Component<any, EditProfilePageState> {
                                     </IonListHeader>
                                     <IonItem>
                                         <IonLabel>(separate with commas)</IonLabel>
-                                        <IonTextarea></IonTextarea>
+                                        <IonTextarea value={languages} name="languages" onIonChange={this.handleChange}></IonTextarea>
                                     </IonItem>
                                     <IonListHeader>
                                         <IonLabel>Features</IonLabel>

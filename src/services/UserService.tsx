@@ -1,6 +1,7 @@
 import * as firebase from 'firebase';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../interfaces/User';
+import { matchService } from '../services/MatchService';
 
 class UserService {
 
@@ -30,6 +31,7 @@ class UserService {
             .collection('Users')
             .doc(this.id);
 
+            matchService.init(this.id);
         return new Promise((resolve, reject) => {
             this.userRef
                 .get()
@@ -76,7 +78,6 @@ class UserService {
     setupStreams() {
         this.userRef
             .onSnapshot((data) => {
-                console.log('doc update', data);
                 if (!data.exists) {
                     this.userDoc$.next(null);
                     this.userDoc = null;
@@ -126,7 +127,6 @@ export const userService: UserService = window['userService'];
 // component mount
 const us = new UserService('penis');
 const sub$ = us.userDoc$.subscribe(data => {
-    console.log(data);
     // data is of type User
 });
 

@@ -46,6 +46,7 @@ import './theme/variables.css';
 import PrivateRoute from './components/PrivateRoute';
 import { userService } from './services/UserService';
 import firebase from 'firebase';
+import { matchService } from './services/MatchService';
 
 const App: React.FC = () => {
   const [state, updateState] = React.useState(0);
@@ -54,9 +55,8 @@ const App: React.FC = () => {
   const init = () => {
     firebase.auth().onAuthStateChanged(async (user) => {
       if (user !== null) {
-        console.log(user);
         await userService.init(user.uid);
-        console.log("update")
+        await matchService.init(user.uid);
         forceUpdate()
       }
     });

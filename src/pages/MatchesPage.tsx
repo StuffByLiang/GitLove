@@ -3,7 +3,7 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonListHeader, Io
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab2.css';
 import UserMessage from '../components/UserMessage';
-import { matchService } from '../services/MatchService';
+import { MatchService, matchService } from '../services/MatchService';
 import { Subscription } from 'rxjs';
 
 class MatchesPage extends React.Component {
@@ -49,7 +49,7 @@ class MatchesPage extends React.Component {
             <IonListHeader>
               Recent Conversations
           </IonListHeader>
-          {this.state.matches.map(match => <UserMessage match={match}/>)}
+          {this.state.matches.map(match => <UserMessage matchh={match}/>)}
             {/* <UserMessage /> */}
 
           </IonList>

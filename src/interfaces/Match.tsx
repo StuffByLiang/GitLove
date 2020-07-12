@@ -8,4 +8,9 @@ export interface Match {
 export interface Message {
     authorUid: string;
     code: string;
+    // status: Status;
+}
+
+export enum Status {
+    Read
 }

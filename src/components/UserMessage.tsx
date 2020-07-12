@@ -6,6 +6,8 @@ import { Gender, User } from '../interfaces/User';
 import { getUserService } from '../services/GetUserService';
 import ChatPage from '../components/ChatMessage'
 import { Match } from '../interfaces/Match';
+import { withRouter } from "react-router-dom";
+
 
 //inclde firebase
 
@@ -15,11 +17,11 @@ interface UserMessageState {
 }
 
 interface UserMessageProps {
-    match: Match
+    matchh: Match,
+    history: any
 }
 
 class UserMessage extends React.Component<UserMessageProps, UserMessageState> {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -36,7 +38,7 @@ class UserMessage extends React.Component<UserMessageProps, UserMessageState> {
                 likedUsers: [],
                 nopedUsers: []
             },
-            match: props.match
+            match: props.matchh
             // match : {
             //     _id: '',
             //     matchedUsers: ['foo', 'bar'],
@@ -51,8 +53,9 @@ class UserMessage extends React.Component<UserMessageProps, UserMessageState> {
     }
 
     componentDidMount() {
+        console.log(this.props)
         const myId: string = firebase.auth().currentUser.uid;
-        const otherId: string = this.state.match.matchedUsers.filter(id => id !== myId)[0];
+        const otherId: string = this.props.matchh.matchedUsers.filter(id => id !== myId)[0];
 
         getUserService
             .Users$
@@ -67,20 +70,25 @@ class UserMessage extends React.Component<UserMessageProps, UserMessageState> {
                 });
             });
     }
+    
+    handleClick() {
+        window["code"] = this.props.matchh.message.code;
+        console.log(this.props.history.push("/run"));
+    }
 
     render() {
         return <>
-            <IonItem button onClick={() => {}}>
+            <IonItem button onClick={this.handleClick.bind(this)}>
                 <IonAvatar slot="start">
                     <img src={this.state.user.profilePicture}/> 
                 </IonAvatar>
                 <IonLabel>
                     <h2>{this.state.user.name}</h2>
-                    <p> {this.state.user.description}</p>
+                    <p>Click to send lambda</p>
                 </IonLabel>
             </IonItem>
         </>;
     }
 }
 
-export default UserMessage;
+export default withRouter(UserMessage);
