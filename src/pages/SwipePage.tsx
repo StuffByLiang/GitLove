@@ -30,6 +30,7 @@ class SwipePage extends React.Component {
   state = {
     swipedUsers: [],
     allUsers: [],
+    shownUsers: [],
     flag: 0,
   };
 
@@ -42,31 +43,55 @@ class SwipePage extends React.Component {
     this.nope = this.nope.bind(this)
   }
 
-  filterUsers(users: Array<User>) {
+  filterUsers1(users: Array<User>) {
+    let currentUserId = userService.id;
+
+    return users.filter((user: User) => {
+      return !this.state.swipedUsers.includes(user._id) && !this.state.shownUsers.map((user)=>user._id).includes(user._id) && user._id != currentUserId;
+    })
+  }
+
+  filterUsers2(users: Array<User>) {
     let currentUserId = userService.id;
 
     return users.filter((user: User) => {
       return !this.state.swipedUsers.includes(user._id) && user._id != currentUserId;
-    }).slice(0, 3)
+    })
+  }
+
+  updateShownUsers() {
+    let validUsers = this.filterUsers1(this.state.allUsers)
+    let shownUsers = this.filterUsers2(this.state.shownUsers);
+    console.log(validUsers, shownUsers, this.state.swipedUsers)
+
+    while (validUsers.length > 0 && shownUsers.length < 3) {
+      shownUsers.unshift(validUsers.pop())
+    }
+
+    console.log(validUsers, shownUsers)
+
+    this.setState({
+      shownUsers
+    })
   }
 
   async componentDidMount() {
+
+    this.userSub$ = userService.userDoc$
+      .subscribe(user => {
+        if (user !== null) {
+          this.setState({
+            swipedUsers: user.likedUsers.concat(user.nopedUsers),
+          }, this.updateShownUsers)
+        }
+      })
 
     this.usersSub$ = getUserService.Users$
       .subscribe(data => {
         if (data !== null) {
           this.setState({
             allUsers: data,
-          })
-        }
-      })
-
-    this.userSub$ = userService.userDoc$
-      .subscribe(user => {
-        if (user !== null) {
-          this.setState({
-            swipedUsers: user.likedUsers.concat(user.nopedUsers)
-          })
+          }, this.updateShownUsers)
         }
       })
 
@@ -108,9 +133,7 @@ class SwipePage extends React.Component {
 
   render() {
     let users;
-
-    if (this.state.allUsers)
-      users = this.filterUsers(this.state.allUsers).map(user => {
+      users = this.state.shownUsers.map(user => {
         return <UserCard
           key={user._id}
           user={user}
