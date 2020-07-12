@@ -2,6 +2,7 @@ import { PhoneScheme } from "../../services/PhoneScheme";
 import { Binding } from "../core/Binding";
 import { Library } from "../core/Library";
 import React from 'react';
+import Rain from '../../components/Rain';
 
 export class AnimateLibrary extends Library {
 
@@ -27,12 +28,7 @@ export class AnimateLibrary extends Library {
     }
 
     animRain([text]) {
-        let child = document.createTextNode("test");
-        let rainElement = (
-            <div>
-                Fuck You
-            </div>
-        );
-        this.element.appendChild(rainElement);
+        console.log(test);
+        const test = <Rain text="test"/>
     }
 }

@@ -16,6 +16,8 @@ import { userService } from '../services/UserService';
 import { filter } from 'rxjs/operators';
 import { matchMakerService } from '../services/MatchMakerService';
 
+import MatchAnimation from '../components/MatchAnimation';
+
 const config = {
   onSwipedLeft: () => console.log("Swiped Left"),
   onSwipedRight: () => console.log("Swiped Right"),
@@ -28,6 +30,7 @@ class SwipePage extends React.Component {
   state = {
     swipedUsers: [],
     allUsers: [],
+    flag: 0,
   };
 
   usersSub$: Subscription = new Subscription();
@@ -69,6 +72,12 @@ class SwipePage extends React.Component {
 
   }
 
+  flag = 0;
+
+  matchMade() {
+    this.state.flag = 1;
+  }
+
   like(user: User) {
     let likedUsers = userService.userDoc.likedUsers;
     likedUsers.push(user._id);
@@ -76,7 +85,8 @@ class SwipePage extends React.Component {
       likedUsers
     });
     console.log(user.likedUsers, userService.userDoc._id, 'yeet');
-    if (user.likedUsers.indexOf(userService.userDoc._id) !== -1){
+    if (user.likedUsers.indexOf(userService.userDoc._id) !== -1) {
+      this.matchMade();
       matchMakerService.createNewMatch([userService.userDoc._id, user._id]);
     }
   }
@@ -140,6 +150,9 @@ class SwipePage extends React.Component {
           </IonFabList>
         </IonFab> */}
 
+
+
+          {this.state.flag === 1 ? <MatchAnimation /> : null}
 
 
           <div className="usercard-container">
