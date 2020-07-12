@@ -21,7 +21,7 @@ export class SoundLibrary extends Library {
 
 
         // sound-love
-        // (sound-fart)
+        // (sound-love)
         this.addBinding(new Binding(
             'sound-love',
             this.loveSound.bind(this),

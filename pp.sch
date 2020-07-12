@@ -14,3 +14,8 @@
 	(cond [(zero? s) (text "D" 200 100 10)]
         [else (text "=" (- 200 (* s 10)) 100 10)
               (penis-loop (- s 1))]))
+
+
+(define (snippet)
+        (clock)
+        (send-love "english" 10 180))
