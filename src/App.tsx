@@ -17,7 +17,6 @@ import SwipePage from './pages/SwipePage';
 import MatchesPage from './pages/MatchesPage';
 import SettingsPage from './pages/SettingsPage';
 import CodingPage from './pages/CodingPage';
-import Aiden from './pages/Aiden';
 import RunPage from './pages/RunPage';
 import Notifications from './pages/Notifications';
 import EditPreferencesPage from './pages/EditPreferencesPage';
@@ -47,6 +46,7 @@ import PrivateRoute from './components/PrivateRoute';
 import { userService } from './services/UserService';
 import firebase from 'firebase';
 import { matchService } from './services/MatchService';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 
 const App: React.FC = () => {
   const [state, updateState] = React.useState(0);
@@ -78,11 +78,11 @@ const App: React.FC = () => {
               <PrivateRoute path="/matches" component={MatchesPage} exact={true} />
               <PrivateRoute path="/settings" component={SettingsPage} />
               <PrivateRoute path="/coding" component={CodingPage} />
-              <PrivateRoute path="/aiden" component={Aiden} />
               <PrivateRoute path="/run" component={RunPage} />
               <PrivateRoute path="/notifications" component={Notifications} />
               <PrivateRoute path="/edit-preferences" component={EditPreferencesPage} />
               <PrivateRoute path="/edit-profile" component={EditProfilePage} />
+              <PrivateRoute path="/privacy-policy" component={PrivacyPolicyPage} />
             </IonRouterOutlet>
 
             <IonTabBar slot="bottom">

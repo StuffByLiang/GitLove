@@ -97,15 +97,15 @@ const SettingsPage: React.FC = () => {
           </IonListHeader>
 
 
-          <IonItem button onClick={() => { }}>
+          <IonItem button routerLink="/privacy-policy" routerDirection="forward">
             <IonLabel>View Privacy Policy</IonLabel>
           </IonItem>
-          <IonItem button onClick={() => { }}>
+          {/* <IonItem button onClick={() => { }}>
             <IonLabel>View Terms of Service</IonLabel>
-          </IonItem>
-          <IonItem button onClick={() => { }}>
+          </IonItem> */}
+          {/* <IonItem button onClick={() => { }}>
             <IonLabel>Licenses</IonLabel>
-          </IonItem>
+          </IonItem> */}
 
 
         </IonList>

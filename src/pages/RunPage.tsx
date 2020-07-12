@@ -2,6 +2,7 @@ import { IonBackButton, IonButton, IonButtons, IonCol, IonContent, IonFooter, Io
 import React from 'react';
 import { DrawingLibrary } from '../classes/lib/Drawing';
 import { AnimationLibrary } from '../classes/lib/Animation';
+import { SoundLibrary } from '../classes/lib/Sound';
 import RuntimeEnvironment from '../services/RuntimeEnvironment';
 import './RunPage.css';
 
@@ -18,6 +19,7 @@ class RunPage extends React.Component {
         // Import Dependencies!
         RuntimeEnvironment.addLibrary(new DrawingLibrary(this.canvasRef.current.getContext('2d')));
         RuntimeEnvironment.addLibrary(new AnimationLibrary(this.canvasRef.current.getContext('2d')));
+        RuntimeEnvironment.addLibrary(new SoundLibrary());
 
         // Run Script!
         RuntimeEnvironment.runScript(window['code']);

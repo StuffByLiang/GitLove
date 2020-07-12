@@ -79,7 +79,7 @@ export class DrawingLibrary extends Library {
 
 
         // Draw horizontal mirror for a give string
-        // (mirror <str>)
+        // (mirror <str> <x> <y>)
         this.addBinding(new Binding(
             'mirror',
             this.drawMirror.bind(this),
@@ -185,7 +185,7 @@ export class DrawingLibrary extends Library {
     }
 
 
-    drawMirror([x, y, str]) {
+    drawMirror([str, x, y]) {
         this.context.scale(-1, 1);
         this.context.font = '48px serif';
         this.context.fillText(str, x, y);

@@ -30,8 +30,7 @@
     "react-tinder-card": "^1.1.4",
     "rxjs": "^6.6.0",
     "styled-components": "^5.1.1",
-    "typescript": "3.8.3",
-    "use-sound": "^1.0.2"
+    "typescript": "3.8.3"
   },
   "scripts": {
     "start": "react-scripts start",
