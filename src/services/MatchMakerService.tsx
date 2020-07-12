@@ -24,6 +24,27 @@ export class MatchMakerService {
         const match = firebase.firestore().collection('Matches').doc(id);
         await match.update(data);
     }
+
+    async markRead(match: Match) {
+        let message = match.message;
+        message.read = true;
+
+        matchMakerService.updateById(match._id, {
+            message
+        });
+    }
+
+    async sendMessage(match: Match, code: string) {
+        let message = match.message;
+
+        message.code = code;
+        message.read = false;
+        message.authorUid = firebase.auth().currentUser.uid;
+
+        matchMakerService.updateById(match._id, {
+            message
+        });
+    }
 }
 
 window['matchMakerService'] = new MatchMakerService();

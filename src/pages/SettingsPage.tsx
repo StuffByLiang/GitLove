@@ -48,6 +48,15 @@ const SettingsPage: React.FC = () => {
           </IonItem>
 
           <IonListHeader>
+            <IonLabel>Code editor</IonLabel>
+          </IonListHeader>
+
+          <IonItem button routerLink="/coding" routerDirection="forward">
+            <IonLabel>Go to Coding Page</IonLabel>
+          </IonItem >
+
+
+          <IonListHeader>
             <IonLabel>Contact Us</IonLabel>
           </IonListHeader>
 

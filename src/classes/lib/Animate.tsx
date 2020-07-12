@@ -1,7 +1,7 @@
 import { PhoneScheme } from "../../services/PhoneScheme";
 import { Binding } from "../core/Binding";
 import { Library } from "../core/Library";
-
+import React from 'react';
 
 export class AnimateLibrary extends Library {
 
@@ -26,6 +26,13 @@ export class AnimateLibrary extends Library {
         return this;
     }
 
-    animRain([emoji]) {
+    animRain([text]) {
+        let child = document.createTextNode("test");
+        let rainElement = (
+            <div>
+                Fuck You
+            </div>
+        );
+        this.element.appendChild(rainElement);
     }
 }

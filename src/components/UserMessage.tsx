@@ -7,6 +7,7 @@ import { getUserService } from '../services/GetUserService';
 import ChatPage from '../components/ChatMessage'
 import { Match, Message } from '../interfaces/Match';
 import { withRouter } from "react-router-dom";
+import { matchMakerService } from '../services/MatchMakerService';
 
 
 //inclde firebase
@@ -76,20 +77,39 @@ class UserMessage extends React.Component<UserMessageProps, UserMessageState> {
         console.log(message)
         if(message.read) {
             // last message is read, so anyone can send a new message
+            window["code"] = this.state.match;
             this.props.history.push("/coding")
         } else {
             if(message.authorUid == firebase.auth().currentUser.uid) {
                 // last message is unread and sent by current user, do nothing
                 
             } else {
-                // last message is unread and sent by other user, view the message
-                window["code"] = this.props.matchh.message.code;
+                // last message is unread and sent by other user, view the message and update that it is read
+                let message = this.state.match.message;
+
+                matchMakerService.markRead(this.state.match);
+
+                window["code"] = this.state.match.message.code;
                 this.props.history.push("/run");
             }
         }
     }
 
     render() {
+        const message: Message = this.props.matchh.message;
+        let msg = "";
+        if(message.read) {
+            msg = "Click to send a new lambda"
+        } else {
+            if(message.authorUid == firebase.auth().currentUser.uid) {
+                // last message is unread and sent by current user, do nothing
+                msg = "Sent"
+            } else {
+                // last message is unread and sent by other user, view the message
+                msg = "Click to view the lambda"
+            }
+        }
+
         return <>
             <IonItem button onClick={this.handleClick.bind(this)}>
                 <IonAvatar slot="start">
@@ -97,7 +117,7 @@ class UserMessage extends React.Component<UserMessageProps, UserMessageState> {
                 </IonAvatar>
                 <IonLabel>
                     <h2>{this.state.user.name}</h2>
-                    <p>Click to send lambda</p>
+                    {msg === "Click to view the lambda" ? <b>{msg}</b> : <p>{msg}</p>}
                 </IonLabel>
             </IonItem>
         </>;

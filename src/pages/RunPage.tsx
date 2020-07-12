@@ -40,6 +40,12 @@ class RunPage extends React.Component {
                     <IonGrid>
                         <IonRow>
                             <IonCol>
+                                <div ref={this.animateRef}>
+                                </div>
+                            </IonCol>
+                        </IonRow>
+                        <IonRow>
+                            <IonCol>
                                 <canvas
                                     id="canvas"
                                     width={300}
